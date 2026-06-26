@@ -3,7 +3,7 @@
 #
 # Required GitHub repo settings:
 #   Secrets   → GCP_SA_KEY      : full content of the service-account JSON key
-#   Variables → GCP_PROJECT_ID  : your GCP project ID (e.g. gbi-test)
+#   Variables → GCP_PROJECT_ID  : project ID
 #   Variables → BQ_LOCATION     : BigQuery region (e.g. US)
 
 name: dbt CI — Google Fiber

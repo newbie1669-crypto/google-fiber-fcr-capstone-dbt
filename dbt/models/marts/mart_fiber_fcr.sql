@@ -1,5 +1,5 @@
 -- models/marts/mart_fiber_fcr.sql
--- Final mart: รวมทุก market + คำนวณ FCR metrics พร้อม connect Tableau
+-- Final mart: Union all markets and calculate FCR metrics
 
 WITH combined AS (
     SELECT * FROM {{ ref('stg_market_1') }}
@@ -17,6 +17,7 @@ WITH combined AS (
 -- even have follow-up contacts, which is impossible with 0 originals.
 -- SAFE_DIVIDE by a 0 denominator returns NULL, so FCR "was not
 -- calculated" for those rows. They are excluded here.
+
 valid AS (
     SELECT * FROM combined
     WHERE contacts_n > 0
@@ -27,8 +28,6 @@ with_metrics AS (
         date_created,
         new_type,
         new_market,
-
-        -- Raw contact counts
         contacts_n,
         contacts_n_1,
         contacts_n_2,
@@ -38,31 +37,27 @@ with_metrics AS (
         contacts_n_6,
         contacts_n_7,
 
-        -- Total repeat contacts (day 1-7)
         (contacts_n_1 + contacts_n_2 + contacts_n_3 +
          contacts_n_4 + contacts_n_5 + contacts_n_6 + contacts_n_7) AS total_repeat_contacts,
 
-        -- FCR Rate: % ของ first contacts ที่ไม่มี follow-up วันถัดไป
-        -- GREATEST(..., 0): repeat contacts สามารถ "มากกว่า" first contacts ได้
-        -- (1 เคสโทรซ้ำหลายครั้ง) ทำให้ numerator ติดลบ → rate < 0.
-        -- จำนวน contact ที่ "ปิดจบในครั้งเดียว" ติดลบไม่ได้ จึง floor ไว้ที่ 0
-        -- (ถ้า repeat ล้น first contacts ในวันนั้น FCR = 0%).
+        -- Day 1 FCR Rate
+        -- ใช้ GREATEST(..., 0) คัด repeat contacts ที่ "มากกว่า" first contacts
+        -- (1 เคสอาจจะมีการโทรซ้ำหลายครั้ง) ทำให้เลขติดลบ FCR rate < 0%
+        -- ถ้า repeat ล้น first contacts ในวันนั้นถือว่า FCR ตัดเป็น 0% ทันที เพราะแก้ปัญหาให้ลูกค้าไม่ได้
+
         SAFE_DIVIDE(
             GREATEST(contacts_n - contacts_n_1, 0),
             contacts_n
         ) AS fcr_day1_rate,
 
-        -- 7-day FCR Rate: ไม่มี repeat ใน 7 วัน (floor ที่ 0 ด้วยเหตุผลเดียวกัน)
+        -- 7-day FCR Rate
         SAFE_DIVIDE(
-            GREATEST(
-                contacts_n - (contacts_n_1 + contacts_n_2 + contacts_n_3 +
-                              contacts_n_4 + contacts_n_5 + contacts_n_6 + contacts_n_7),
-                0
-            ),
+            GREATEST(contacts_n - (contacts_n_1 + contacts_n_2 + contacts_n_3 + 
+                                   contacts_n_4 + contacts_n_5 + contacts_n_6 + contacts_n_7), 0),
             contacts_n
         ) AS fcr_7day_rate,
 
-        -- Repeat rate per day (สำหรับ trend chart ใน Tableau)
+        -- Repeat rate per day
         SAFE_DIVIDE(contacts_n_1, contacts_n) AS repeat_rate_day1,
         SAFE_DIVIDE(contacts_n_2, contacts_n) AS repeat_rate_day2,
         SAFE_DIVIDE(contacts_n_3, contacts_n) AS repeat_rate_day3,

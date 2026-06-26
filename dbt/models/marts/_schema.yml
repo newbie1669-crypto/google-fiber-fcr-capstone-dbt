@@ -1,5 +1,5 @@
 # models/marts/_schema.yml
-# Data-quality tests for the mart layer — covers CHECK 1-7 from the original analysis.
+# Config and data quality tests for the mart layer.
 # Note: generic-test arguments are nested under `arguments:` (required by dbt 1.10+).
 
 version: 2
@@ -9,7 +9,7 @@ models:
     description: "Final FCR mart combining all markets, with metrics for BI tools"
 
     columns:
-      # ── CHECK 2: NULL checks ──────────────────────────────────────────
+      # NULL checks
       - name: date_created
         description: "Record date (first-contact date)"
         tests:
@@ -17,39 +17,40 @@ models:
 
       - name: new_type
         description: >
-          Problem type. Raw values are type_1..type_5; staging uppercases them.
-          Business mapping: TYPE_1=Account management, TYPE_2=Technician
-          troubleshooting, TYPE_3=Scheduling, TYPE_4=Construction,
-          TYPE_5=Internet and WiFi.
+          Problem type. Raw values are type_1 - type_5.
+          Business mapping: TYPE_1 = Account management, TYPE_2 = Technician
+          troubleshooting, TYPE_3 = Scheduling, TYPE_4 = Construction,
+          TYPE_5 = Internet and WiFi.
         tests:
           - not_null
-          # ── CHECK 6a: accepted values ─────────────────────────────────
-          # Must match the actual data: raw type_1..type_5 -> UPPER -> TYPE_1..TYPE_5
+          # Check accepted values.
+          # Must match the actual data: raw type_1..type_5 -> UPPERCASE -> TYPE_1..TYPE_5
           - accepted_values:
               arguments:
                 values: ['TYPE_1', 'TYPE_2', 'TYPE_3', 'TYPE_4', 'TYPE_5']
                 quote: true
 
       - name: new_market
-        description: "Market identifier"
+        description: Market identifier. Raw values are ['MARKET_1', 'MARKET_2', 'MARKET_3'].
         tests:
           - not_null
-          # ── CHECK 6b: accepted values ─────────────────────────────────
+          # ── Check accepted values.
           - accepted_values:
               arguments:
                 values: ['MARKET_1', 'MARKET_2', 'MARKET_3']
                 quote: true
 
       - name: contacts_n
-        description: "First contacts"
+        description: First contacts check.
         tests:
           - not_null
-          # ── CHECK 5: no negative values ───────────────────────────────
+          # No negative values.
           - dbt_utils.expression_is_true:
               arguments:
                 expression: ">= 0"
 
       - name: contacts_n_1
+        description: Contacts 1 day after first contacts check.
         tests:
           - not_null
           - dbt_utils.expression_is_true:
@@ -57,6 +58,7 @@ models:
                 expression: ">= 0"
 
       - name: contacts_n_2
+        description: Contacts 2 days after first contacts check.
         tests:
           - not_null
           - dbt_utils.expression_is_true:
@@ -64,6 +66,7 @@ models:
                 expression: ">= 0"
 
       - name: contacts_n_3
+        description: Contacts 3 days after first contacts check.
         tests:
           - not_null
           - dbt_utils.expression_is_true:
@@ -71,6 +74,7 @@ models:
                 expression: ">= 0"
 
       - name: contacts_n_4
+        description: Contacts 4 days after first contacts check.
         tests:
           - not_null
           - dbt_utils.expression_is_true:
@@ -78,6 +82,7 @@ models:
                 expression: ">= 0"
 
       - name: contacts_n_5
+        description: Contacts 5 days after first contacts check.
         tests:
           - not_null
           - dbt_utils.expression_is_true:
@@ -85,6 +90,7 @@ models:
                 expression: ">= 0"
 
       - name: contacts_n_6
+        description: Contacts 6 days after first contacts check.
         tests:
           - not_null
           - dbt_utils.expression_is_true:
@@ -92,26 +98,29 @@ models:
                 expression: ">= 0"
 
       - name: contacts_n_7
+        description: Contacts 7 days after first contacts check.
         tests:
           - not_null
           - dbt_utils.expression_is_true:
               arguments:
                 expression: ">= 0"
 
-      # ── Extra CHECK: FCR rate must sit within 0-1 ─────────────────────
+      # Check: FCR rate must sit within 0-1
       - name: fcr_day1_rate
+        description: FCR day 1 (primary KPI) check.
         tests:
           - dbt_utils.expression_is_true:
               arguments:
                 expression: "IS NULL OR (fcr_day1_rate >= 0 AND fcr_day1_rate <= 1)"
 
       - name: fcr_7day_rate
+        description: FCR 7 day (secondary KPI) check.
         tests:
           - dbt_utils.expression_is_true:
               arguments:
                 expression: "IS NULL OR (fcr_7day_rate >= 0 AND fcr_7day_rate <= 1)"
 
-    # ── CHECK 3: Unique / No Duplicate ─────────────────────────────────
+    # Unique / No Duplicate check for combination of the columns
     tests:
       - dbt_utils.unique_combination_of_columns:
           arguments:

@@ -1,4 +1,3 @@
-# models/staging/_schema.yml
 # Data-quality tests for the staging layer — run with: dbt test
 # Note: generic-test arguments are nested under `arguments:` (required by dbt 1.10+).
 
