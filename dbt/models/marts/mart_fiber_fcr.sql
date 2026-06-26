@@ -41,9 +41,9 @@ with_metrics AS (
          contacts_n_4 + contacts_n_5 + contacts_n_6 + contacts_n_7) AS total_repeat_contacts,
 
         -- Day 1 FCR Rate
-        -- ใช้ GREATEST(..., 0) คัด repeat contacts ที่ "มากกว่า" first contacts
-        -- (1 เคสอาจจะมีการโทรซ้ำหลายครั้ง) ทำให้เลขติดลบ FCR rate < 0%
-        -- ถ้า repeat ล้น first contacts ในวันนั้นถือว่า FCR ตัดเป็น 0% ทันที เพราะแก้ปัญหาให้ลูกค้าไม่ได้
+        -- Use GREATEST(..., 0) to clamp repeat contacts that exceed first contacts
+        -- (one case may be re-contacted many times), which would make FCR rate < 0%
+        -- If repeats exceed first contacts that day, FCR is cut to 0% since the issue wasn't resolved.
 
         SAFE_DIVIDE(
             GREATEST(contacts_n - contacts_n_1, 0),

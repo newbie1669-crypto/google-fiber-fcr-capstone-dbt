@@ -11,7 +11,7 @@ sources:
         description: "Raw call data Market 1"
         columns:
           - name: date_created
-            description: "วันที่สร้าง record"
+            description: "date create record"
           - name: contacts_n
             description: "n first contacts"
           - name: contacts_n_1
@@ -37,7 +37,7 @@ sources:
         description: "Raw call data Market 2"
         columns:
           - name: date_created
-            description: "วันที่สร้าง record"
+            description: "date create record"
           - name: contacts_n
             description: "n first contacts"
           - name: contacts_n_1
@@ -63,7 +63,7 @@ sources:
         description: "Raw call data Market 3"
         columns:
           - name: date_created
-            description: "วันที่สร้าง record"
+            description: "date create record"
           - name: contacts_n
             description: "n first contacts"
           - name: contacts_n_1
