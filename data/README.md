@@ -1,10 +1,10 @@
 # Data
 
-This folder holds reference data — **not the production source**. The real raw tables live in my BigQuery.
+This folder holds reference data - **not the production source**. The real raw tables live in my BigQuery.
 
 ```
 data/
-├── raw/                # intentionally empty — see below
+├── raw/                # intentionally empty - see below
 └── samples/            # small sanitized CSV for local previews
 ```
 

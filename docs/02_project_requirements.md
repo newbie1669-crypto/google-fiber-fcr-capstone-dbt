@@ -1,6 +1,7 @@
-# Project Requirements Document — Google Fiber
+# Project Requirements Document - Google Fiber
 
 > **Source:** `02_project_requirements.docx` (original)
+
 > **Phase:** Capture
 > **BI Analyst:** Pluemprach Dangdee
 > **Client/Sponsor:** Emma Santiago, Hiring Manager
@@ -19,7 +20,7 @@ The datasets are fictionalized versions of the actual data this team works with.
 
 ## Stakeholder Requirements (Prioritized)
 
-Priority key — **R** = Required, **D** = Desired, **N** = Nice to have.
+Priority key - **R** = Required, **D** = Desired, **N** = Nice to have.
 
 In order to continuously improve customer satisfaction, the dashboard must help Google Fiber decision-makers understand how often customers are having to repeatedly call and what problem types or other factors might be influencing those calls.
 
@@ -80,5 +81,5 @@ The dashboard will be delivered as a published Tableau dashboard, connected to t
 
 Stakeholders have requested a completed BI tool within **2 weeks**, following the milestones below:
 
-- **Week 1** — Data preparation, exploration, and initial dashboard draft.
-- **Week 2** — Stakeholder review, revisions, and final delivery.
+- **Week 1** - Data preparation, exploration, and initial dashboard draft.
+- **Week 2** - Stakeholder review, revisions, and final delivery.

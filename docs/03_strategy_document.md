@@ -1,9 +1,10 @@
-# Strategy Document — Google Fiber
+# Strategy Document - Google Fiber
 
 > **Source:** `03_strategy_document.docx` (original)
+
 > **Phase:** Capture (final step — the dashboard specification)
 
-This document is the bridge between requirements and the built dashboard. It specifies exactly which charts the dashboard must contain, their types, dimensions, and metrics — the blueprint the BI layer is built against.
+This document is the bridge between requirements and the built dashboard. It specifies exactly which charts the dashboard must contain, their types, dimensions, and metrics - the blueprint the BI layer is built against.
 
 ---
 
@@ -12,9 +13,9 @@ This document is the bridge between requirements and the built dashboard. It spe
 | Field             | Value                                                    |
 |-------------------|----------------------------------------------------------|
 | **Proposer**      | Emma Santiago, Hiring Manager                            |
-| **Status**        | Draft → Under review → Implemented / Not implemented     |
+| **Status**        | Draft -> Under review -> Implemented / Not implemented     |
 | **Primary dataset** | `market_1`, `market_2`, `market_3`                     |
-| **Secondary dataset** | —                                                    |
+| **Secondary dataset** | - |
 
 | Name           | Team / Role     | Date              |
 |----------------|-----------------|-------------------|
@@ -47,7 +48,7 @@ This document is the bridge between requirements and the built dashboard. It spe
 
 The dashboard must contain the following four charts.
 
-### Chart 1 — Repeat calls by first date
+### Chart 1 - Repeat calls by first date
 
 | Attribute     | Specification                              |
 |---------------|--------------------------------------------|
@@ -55,7 +56,7 @@ The dashboard must contain the following four charts.
 | Dimension(s)  | Day of initial call, subsequent repeat calls |
 | Metric(s)     | Contact                                    |
 
-### Chart 2 — Market and Problem Type of First Repeat Calls
+### Chart 2 - Market and Problem Type of First Repeat Calls
 
 | Attribute     | Specification                          |
 |---------------|----------------------------------------|
@@ -63,7 +64,7 @@ The dashboard must contain the following four charts.
 | Dimension(s)  | Call type, market, `contact_n_1`       |
 | Metric(s)     | Contact                                |
 
-### Chart 3 — Calls by Market and Type
+### Chart 3 - Calls by Market and Type
 
 | Attribute     | Specification                |
 |---------------|------------------------------|
@@ -71,7 +72,7 @@ The dashboard must contain the following four charts.
 | Dimension(s)  | Market, call type, day       |
 | Metric(s)     | Contact                      |
 
-### Chart 4 — Repeats by Week, Month, and Quarter
+### Chart 4 - Repeats by Week, Month, and Quarter
 
 | Attribute     | Specification          |
 |---------------|------------------------|

@@ -1,6 +1,7 @@
-# Stakeholder Requirements Document — Google Fiber
+# Stakeholder Requirements Document - Google Fiber
 
 > **Source:** `01_stakeholder_requirements.docx` (original)
+
 > **Phase:** Capture
 > **BI Professional:** Pluemprach Dangdee
 > **Client/Sponsor:** Emma Santiago, Hiring Manager
@@ -13,7 +14,7 @@ The team's ultimate goal is to communicate with customers to **reduce call volum
 
 ## Primary Question
 
-> **How often are customers repeatedly contacting the customer service team?**
+> **How often are customers repeatedly contacting the customer service team ?**
 
 ---
 
@@ -27,7 +28,7 @@ The team's ultimate goal is to communicate with customers to **reduce call volum
 | Ian Ortega        | BI Analyst            |
 | Sylvie Essa       | BI Analyst            |
 
-**Stakeholder usage details:** To understand how effectively the team is able to answer customer questions and resolve problems, stakeholders would like to explore how often customers are calling repeatedly across different markets with different problems.
+**Stakeholder usage details :** To understand how effectively the team is able to answer customer questions and resolve problems, stakeholders would like to explore how often customers are calling repeatedly across different markets with different problems.
 
 ---
 
@@ -46,7 +47,7 @@ The team's ultimate goal is to communicate with customers to **reduce call volum
 
 ## Data Sources
 
-Q1 2022 repeat-calls dataset in `.csv` format, covering 3 markets (`market_1`, `market_2`, `market_3`) — provided by Minna Rah, Lead BI Analyst.
+Q1 2022 repeat-calls dataset in `.csv` format, covering 3 markets (`market_1`, `market_2`, `market_3`) - provided by Minna Rah, Lead BI Analyst.
 
 ## Success Metrics
 

@@ -4,7 +4,7 @@ Schema of all tables in the pipeline.
 
 ---
 
-## Raw Source — `gbi-test.fiber.market_{1,2,3}`
+## Raw Source - `gbi-test.fiber.market_{1,2,3}`
 
 Three sibling tables, identical schema, one per market.
 
@@ -36,7 +36,7 @@ Three sibling tables, identical schema, one per market.
 
 ---
 
-## Staging Layer — `dbt_dev.stg_market_{1,2,3}`
+## Staging Layer - `dbt_dev.stg_market_{1,2,3}`
 
 Materialized as **views** for cheap rebuilds.
 
@@ -48,9 +48,9 @@ Same columns as the source, but:
 
 ---
 
-## Mart Layer — `dbt_prod.mart_fiber_fcr`
+## Mart Layer - `dbt_prod.mart_fiber_fcr`
 
-Materialized as a **table** — this is what BI tools connect to.
+Materialized as a **table** - this is what BI tools connect to.
 
 ### Dimensions
 
@@ -86,10 +86,10 @@ Materialized as a **table** — this is what BI tools connect to.
 
 ## Granularity & Uniqueness
 
-The grain of `mart_fiber_fcr` is **one row per `(date_created, new_type, new_market)`** — enforced by the dbt test `dbt_utils.unique_combination_of_columns`.
+The grain of `mart_fiber_fcr` is **one row per `(date_created, new_type, new_market)`** - enforced by the dbt test `dbt_utils.unique_combination_of_columns`.
 
 ## KPI Interpretation Guide
 
-- **`fcr_day1_rate`** — share of first contacts that did **not** trigger a call-back the next day. *Primary KPI* — higher is better.
-- **`fcr_7day_rate`** — share of first contacts with **zero repeats over 7 days**. *Secondary KPI* — stricter measure.
-- **`repeat_rate_day{N}`** — used to plot the **decay curve** of repeat calls over time. Useful for finding "lingering issue" patterns.
+- **`fcr_day1_rate`** - share of first contacts that did **not** trigger a call-back the next day. *Primary KPI* - higher is better.
+- **`fcr_7day_rate`** - share of first contacts with **zero repeats over 7 days**. *Secondary KPI* - stricter measure.
+- **`repeat_rate_day{N}`** - used to plot the **decay curve** of repeat calls over time. Useful for finding "lingering issue" patterns.

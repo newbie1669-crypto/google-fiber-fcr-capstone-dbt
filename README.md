@@ -1,8 +1,8 @@
-# Google Fiber BI Capstone Project — First Contact Resolution (FCR) Analytics
+# Google Fiber BI Capstone Project - First Contact Resolution (FCR) Analytics
 
 End-to-end analytics pipeline measuring repeat-caller behavior across three Google Fiber markets.
 
-**Workflow :** BigQuery → dbt → Tableau / Power BI / Data Studio (ex-name: Looker studio)
+**Workflow :** BigQuery -> dbt -> Tableau / Power BI / Data Studio (ex-name: Looker studio)
 
 ---
 
@@ -10,9 +10,9 @@ End-to-end analytics pipeline measuring repeat-caller behavior across three Goog
 
 Google Fiber's customer service team wants to **reduce repeat calls** and improve first-contact resolution. The business question:
 
-> **"How often are customers repeatedly contacting customer service after their first call — and what problem types or markets drive that behavior?"**
+> **"How often are customers repeatedly contacting customer service after their first call - and what problem types or markets drive that behavior ?"**
 
-Source: Google Business Intelligence Certificate — Case Study 2 (Google Fiber).
+Source: Google Business Intelligence Certificate - Case Study 2 (Google Fiber).
 
 ## Project Delivers
 
@@ -86,7 +86,6 @@ google-fiber-fcr-capstone/
 │   ├── powerbi/
 │   ├── data_studio/
 │   └── mockups/                lo-fi mockups from design phase
-├── Makefile                One-command operations (`make help`)
 └── README.md               You are here
 ```
 
@@ -104,7 +103,7 @@ The `mart_fiber_fcr` table exposes these columns for any BI tool:
 | `new_market`                | STRING | `MARKET_1` / `MARKET_2` / `MARKET_3`                                          |
 | `new_type`                  | STRING | Problem type (technician, internet/wifi, phone, cable, charges)               |
 | `contacts_n`                | INT    | First contacts on `date_created`                                              |
-| `contacts_n_1` … `_n_7`     | INT    | Repeat contacts 1–7 days later                                                |
+| `contacts_n_1` … `_n_7`     | INT    | Repeat contacts 1-7 days later                                                |
 | **`fcr_day1_rate`**         | FLOAT  | **% of customers not calling back the next day** (primary KPI)                |
 | **`fcr_7day_rate`**         | FLOAT  | **% of customers not calling back within 7 days** (secondary KPI)             |
 | `repeat_rate_day1` … `_7`   | FLOAT  | Repeat rate at each day-lag (for decay curves)(*optional I didn't use it either)                      |
@@ -131,13 +130,13 @@ Twelve+ tests run on every push via GitHub Actions. They map to the seven CHECKs
 
 ## Dashboards
 
-Three independent dashboards backed by the same `mart_fiber_fcr` table — pick the BI tool of your choice.
+Three independent dashboards backed by the same `mart_fiber_fcr` table - pick the BI tool of your choice.
 
 | BI Tool             | Status                | Folder                                    |
 |---------------------|-----------------------|-------------------------------------------|
 | **Tableau**         | ✅ Built (.twbx)      | [`dashboards/tableau/`](dashboards/tableau/)             |
 | **Power BI**        | ✅ Built (.pbix)      | [`dashboards/powerbi/`](dashboards/powerbi/)             |
-| **Looker Studio**   | ✅ Built (Data Studio)      | [`dashboards/data_studio/`](dashboards/data_studio/) |
+| **Data Studio**   | ✅ Built (Data Studio)      | [`dashboards/data_studio/`](dashboards/data_studio/) |
 
 Lo-fidelity mockups from the design phase: [`dashboards/mockups/`](dashboards/mockups/).
 
@@ -150,7 +149,7 @@ This project follows the three phases BI project lifecycle from the Google Busin
 | Phase    | What was done                                                   | Folder                         |
 |--------------|-----------------------------------------------------------------|----------------------------------------|
 | **01 Capture**  | Stakeholder requirements, project requirements, strategy doc, ROCCC data quality assessment doc | `docs/`                              |
-| **02 Analyze**  | SQL exploration → dbt models → DQ tests                     | `sql/` + `dbt/` |
+| **02 Analyze**  | SQL exploration -> dbt models -> DQ tests                     | `sql/` + `dbt/` |
 | **03 Monitor**  | Dashboards + lo-fi mockups                                | `dashboards/`                          |
 
 For full detail : [`docs/phase_mapping.md`](docs/phase_mapping.md).
@@ -172,17 +171,17 @@ For full detail : [`docs/phase_mapping.md`](docs/phase_mapping.md).
 
 ### Deliverables documentation (for stakeholder)
 
-- [`docs/01_stakeholder_requirements.md`](docs/01_stakeholder_requirements.md) — what the business asked for
-- [`docs/02_project_requirements.md`](docs/02_project_requirements.md) — scoped & prioritized requirements
-- [`docs/03_strategy_document.md`](docs/03_strategy_document.md) — dashboard spec: the four charts to build
-- [`docs/04_roccc_data_assessment.md`](docs/04_roccc_data_assessment.md) — data quality evaluation
+- [`docs/01_stakeholder_requirements.md`](docs/01_stakeholder_requirements.md) - what the business asked for
+- [`docs/02_project_requirements.md`](docs/02_project_requirements.md) - scoped & prioritized requirements
+- [`docs/03_strategy_document.md`](docs/03_strategy_document.md) - dashboard spec: the four charts to build
+- [`docs/04_roccc_data_assessment.md`](docs/04_roccc_data_assessment.md) - data quality evaluation
 
 ### Reference documentation (for detail)
 
-- [`docs/data_dictionary.md`](docs/data_dictionary.md) — every column explained
-- [`docs/architecture.md`](docs/architecture.md) — pipeline & structure rationale
-- [`docs/phase_mapping.md`](docs/phase_mapping.md) — GBI phase ↔ folder mapping
-- [`dbt/README.md`](dbt/README.md) — dbt project usage guide
+- [`docs/data_dictionary.md`](docs/data_dictionary.md) - every column explained
+- [`docs/architecture.md`](docs/architecture.md) - pipeline & structure rationale
+- [`docs/phase_mapping.md`](docs/phase_mapping.md) - GBI phase <-> folder mapping
+- [`dbt/README.md`](dbt/README.md) - dbt project usage guide
 
 ---
 
