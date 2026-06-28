@@ -15,4 +15,4 @@ Primary deliverable, as requested by the original stakeholder from the capstone 
 
 ## Note
 
-The Tableau dashboard looks different from the other two because it was built first long before this repository was created and closely followed Google's exemplar. (It's OG!!!)
+The Tableau dashboard looks different from the other two because it was built first long before this repository was created and closely followed Google's exemplar (like everybody else does).
