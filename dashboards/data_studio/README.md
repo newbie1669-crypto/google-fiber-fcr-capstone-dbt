@@ -1,4 +1,4 @@
-# Data Studio Dashboard — Google Fiber FCR
+# Data Studio Dashboard - Google Fiber FCR
 
 ## Public link
 
@@ -8,4 +8,4 @@ URL : [`Google Fiber Capstone Dashboard`](https://datastudio.google.com/reportin
 
 ## Auto-refresh
 
-Looker Studio caches BigQuery results for 12 hours by default. Edit the data source → **Data Freshness** to tune (1h is reasonable for most demos).
+Looker Studio caches BigQuery results for 12 hours by default. Edit the data source -> **Data Freshness** to tune (1h is reasonable for most demos).

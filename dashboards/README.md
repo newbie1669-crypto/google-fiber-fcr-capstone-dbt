@@ -6,7 +6,7 @@ Three dashboards built on the **same** `mart_fiber_fcr` table. They answer the s
 dashboards/
 ├── tableau/            *** original capstone project dashboard (it looks different from other)
 ├── powerbi/
-├── looker_studio/
+├── data_studio/
 └── mockups/            lo-fi designs from the planning phase
 ```
 
