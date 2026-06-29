@@ -1,4 +1,4 @@
-# Google Fiber BI Capstone Project - First Contact Resolution (FCR) Analytics
+# Google Fiber BI Capstone Project w/ DBT - First Contact Resolution (FCR) Analytics
 
 End-to-end analytics pipeline measuring repeat-caller behavior across three Google Fiber markets.
 
