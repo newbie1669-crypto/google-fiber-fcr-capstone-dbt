@@ -2,11 +2,15 @@
 
 **End-to-end analytics pipeline measuring repeat-caller behavior across three Google Fiber markets.**
 
-**Workflow :** BigQuery -> DBT(data build tool) -> Tableau / Power BI / Data Studio (ex-name: Looker studio)
+**Workflow :** BigQuery -> DBT (data build tool) -> Tableau / Power BI / Data Studio (ex-name: Looker studio)
 
-Note : เป็นโปรเจคที่ต่อยอดมาจากตัว [classic project](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-classic) มี logic การเขียน SQL , dataset และ dashboard เหมือนกัน สิ่งที่เพิ่มขึ้นมา คือ การทำ data pipeline ของจริง เป็น ELT ที่มีการ transformation และ test อย่างเป็นระบบ ระบบนี้เป็นแค่ "toy project" แต่สามารถนำมา scale ออกได้จริงด้วยแค่เปลี่ยน data source สามารถ automation การ CI/CD ได้จริง ด้วยเครื่องมือที่เพิ่มเข้ามา คือ DBT 
+---
 
-สำหรับ DBT สั้นๆ มันเป็น framework ที่ทำให้การเขียน SQL กลายเป็นเหมือน data engineering จริงๆ - เขียน model เป็น .sql ไฟล์, เขียน config หรือ การตั้งค่าระบบ pipeline เป็น .yaml ไฟล์,  test, document และ run ทีเดียวทั้ง pipeline ศึกษาเพิ่มเติมได้ที่ [getdbt.com](https://www.getdbt.com/) เค้ามีคอร์สเรียนฟรีด้วย ถือเป็นเครื่องมือที่ทรงพลังมากเวลาใช้กับพวก modern data stack (ฺGoogle BigQuery, Databricks, Snowflake, Amazon Redshift, etc.) เพื่อทำงาน Business intelligence หรือ Analytics engineering
+## อธิบายก่อนเข้าโปรเจค
+
+เป็นโปรเจคที่ต่อยอดมาจากตัว [classic project](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-classic) มี logic การเขียน SQL , dataset และ dashboard เหมือนกัน สิ่งที่เพิ่มขึ้นมา คือ การทำ data pipeline ของจริง เป็น ELT ที่มีการ transformation และ test อย่างเป็นระบบ ระบบนี้เป็นแค่ "toy project" แต่สามารถนำมา scale ออกได้จริงด้วยแค่เปลี่ยน data source สามารถ automation การ CI/CD ได้จริง ด้วยเครื่องมือที่เพิ่มเข้ามา คือ DBT (data build tool)
+
+สำหรับ DBT สั้นๆ มันเป็น framework ที่ทำให้การเขียน SQL กลายเป็นเหมือน data engineering จริงๆ - เขียน model เป็น .sql ไฟล์, เขียน config หรือ การตั้งค่าระบบ pipeline เป็น .yaml ไฟล์,  test, document และ run ทีเดียวทั้ง pipeline ศึกษาเพิ่มเติมได้ที่ [getdbt.com](https://www.getdbt.com/) มีคอร์สเรียนฟรีด้วย ถือเป็นเครื่องมือที่ทรงพลังมากเวลาใช้กับพวก modern data stack (ฺGoogle BigQuery, Databricks, Snowflake, Amazon Redshift, etc.) เพื่อทำงาน Business intelligence หรือ Analytics engineering
 
 ---
 
