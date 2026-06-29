@@ -1,8 +1,12 @@
 # Google Fiber BI Capstone Project w/ DBT - First Contact Resolution (FCR) Analytics
 
-End-to-end analytics pipeline measuring repeat-caller behavior across three Google Fiber markets.
+**End-to-end analytics pipeline measuring repeat-caller behavior across three Google Fiber markets.**
 
-**Workflow :** BigQuery -> dbt -> Tableau / Power BI / Data Studio (ex-name: Looker studio)
+**Workflow :** BigQuery -> DBT(data build tool) -> Tableau / Power BI / Data Studio (ex-name: Looker studio)
+
+Note : เป็นโปรเจคที่ต่อยอดมาจากตัว [classic project](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-classic) มี logic การเขียน SQL , dataset และ dashboard เหมือนกัน สิ่งที่เพิ่มขึ้นมา คือ การทำ data pipeline ของจริง เป็น ELT ที่มีการ transformation และ test อย่างเป็นระบบ ระบบนี้เป็นแค่ "toy project" แต่สามารถนำมา scale ออกได้จริงด้วยแค่เปลี่ยน data source สามารถ automation การ CI/CD ได้จริง ด้วยเครื่องมือที่เพิ่มเข้ามา คือ DBT 
+
+สำหรับ DBT สั้นๆ มันเป็น framework ที่ทำให้การเขียน SQL กลายเป็นเหมือน data engineering จริงๆ - เขียน model เป็น .sql ไฟล์, เขียน config หรือ การตั้งค่าระบบ pipeline เป็น .yaml ไฟล์,  test, document และ run ทีเดียวทั้ง pipeline ศึกษาเพิ่มเติมได้ที่ [getdbt.com](https://www.getdbt.com/) เค้ามีคอร์สเรียนฟรีด้วย ถือเป็นเครื่องมือที่ทรงพลังมากเวลาใช้กับพวก modern data stack (ฺGoogle BigQuery, Databricks, Snowflake, Amazon Redshift, etc.) เพื่อทำงาน Business intelligence หรือ Analytics engineering
 
 ---
 
@@ -12,7 +16,7 @@ Google Fiber's customer service team wants to **reduce repeat calls** and improv
 
 > **"How often are customers repeatedly contacting customer service after their first call - and what problem types or markets drive that behavior ?"**
 
-Source: Google Business Intelligence Certificate - Case Study 2 (Google Fiber).
+Source: Google Business Intelligence Professional Certificate - Case Study 2 (Google Fiber).
 
 ## Project Delivers
 
@@ -188,3 +192,5 @@ For full detail : [`docs/phase_mapping.md`](docs/phase_mapping.md).
 ## Author
 
 **Pluemprach Dangdee** — Google Business Intelligence Capstone, 2025–2026
+
+**ต้องขอบคุณ Claude ด้วยที่ช่วยสอนผม ช่วยวาดแผนผัง และพาผมทำโดยไม่บ่นซักคำ555**
