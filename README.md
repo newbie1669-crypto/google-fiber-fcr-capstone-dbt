@@ -4,6 +4,8 @@
 
 **Workflow :** BigQuery -> DBT (data build tool) -> Tableau / Power BI / Data Studio (ex-name: Looker studio)
 
+<img src="docs/images/dbt.png" alt="dbt">
+
 ---
 
 ## อธิบายก่อนเข้าโปรเจค
@@ -197,4 +199,4 @@ For full detail : [`docs/phase_mapping.md`](docs/phase_mapping.md).
 
 **Pluemprach Dangdee** — Google Business Intelligence Capstone, 2025–2026
 
-**ต้องขอบคุณ Claude ด้วยที่ช่วยสอนผม ช่วยวาดแผนผัง และพาผมทำโดยไม่บ่นซักคำ555**
+**ต้องขอบคุณ Claude ด้วยที่ช่วยสอนผม ช่วยวาดแผนผัง และพาผมทำโดยไม่บ่นซักคำ**
