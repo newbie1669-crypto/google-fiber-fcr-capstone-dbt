@@ -75,9 +75,10 @@ jobs:
 
       - name: Generate dbt docs
         run: dbt docs generate
+        working-directory: ./dbt
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./target
+          publish_dir: ./dbt/target
