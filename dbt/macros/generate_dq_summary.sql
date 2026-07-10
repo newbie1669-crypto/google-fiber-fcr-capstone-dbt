@@ -1,5 +1,5 @@
 -- macros/generate_dq_summary.sql
--- Macro สำหรับ generate DQ summary report ใช้ใน analyses/
+-- Macro for generate DQ summary report in analyses/
 
 {% macro generate_dq_summary(model_name) %}
 

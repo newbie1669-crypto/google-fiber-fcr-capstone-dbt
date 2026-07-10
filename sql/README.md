@@ -2,7 +2,7 @@
 
 The **original SQL files from the classic project** written to finish my certificate long before the project was migrated to dbt. They are kept for **reference, learning and storytelling**, not for production purpose.
 
-```
+```text
 sql/
 ├── 01_preparation_and_union.sql       Union of three market tables
 └── 02_data_quality_check.sql          Manual DQ checks (CHECK 1–7)

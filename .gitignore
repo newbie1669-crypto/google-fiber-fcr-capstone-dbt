@@ -5,7 +5,7 @@
 # ============================================================
 
 # ── Secrets / Credentials ───────────────────────────────────
-# NEVER commit these. profiles.yml lives at ~/.dbt/profiles.yml only.
+# NEVER commit. profiles.yml lives at ~/.dbt/profiles.yml only.
 **/profiles.yml
 .env
 .env.*

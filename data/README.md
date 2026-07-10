@@ -2,9 +2,9 @@
 
 This folder holds reference data - **not the production source**. The real raw tables live in my BigQuery.
 
-```
+```text
 data/
-├── raw/                # intentionally empty - see below
+├── raw/                # intentionally empty
 └── samples/            # small sanitized CSV for local previews
 ```
 

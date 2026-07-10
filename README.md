@@ -10,6 +10,8 @@
 
 ## อธิบายก่อนเข้าโปรเจค
 
+"classic = the analysis; this repo = the production pipeline"
+
 เป็นโปรเจคที่ต่อยอดมาจากตัว [classic project](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-classic) มี logic การเขียน SQL , dataset และ dashboard เหมือนกัน สิ่งที่เพิ่มขึ้นมา คือ การทำ data pipeline ของจริง เป็น ELT ที่มีการ transformation และ test อย่างเป็นระบบ ระบบนี้เป็นแค่ "toy project" แต่สามารถนำมา scale ออกได้จริงด้วยแค่เปลี่ยน data source สามารถ automation การ CI/CD ได้จริง ด้วยเครื่องมือที่เพิ่มเข้ามา คือ DBT (data build tool)
 
 สำหรับ DBT สั้นๆ มันเป็น framework ที่ทำให้การเขียน SQL กลายเป็นเหมือน data engineering จริงๆ - เขียน model เป็น .sql ไฟล์, เขียน config หรือ การตั้งค่าระบบ pipeline เป็น .yaml ไฟล์,  test, document และ run ทีเดียวทั้ง pipeline ศึกษาเพิ่มเติมได้ที่ [getdbt.com](https://www.getdbt.com/) มีคอร์สเรียนฟรีด้วย ถือเป็นเครื่องมือที่ทรงพลังมากเวลาใช้กับพวก modern data stack (ฺGoogle BigQuery, Databricks, Snowflake, Amazon Redshift, etc.) เพื่อทำงาน Business intelligence หรือ Analytics engineering
@@ -40,7 +42,7 @@ Source: Google Business Intelligence Professional Certificate - Case Study 2 (Go
 
 ## Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                                                                     │
 │   ┌──────────────────┐         ┌──────────────────┐                 │
@@ -80,7 +82,7 @@ See [`docs/architecture.md`](docs/architecture.md) for the full diagram and rati
 
 ## Repository Layout
 
-```
+```text
 google-fiber-fcr-capstone/
 ├── .github/workflows/      CI: auto-run dbt on push to main
 ├── docs/                   Requirements, ROCCC, architecture, data dictionary
@@ -156,11 +158,11 @@ Lo-fidelity mockups from the design phase: [`dashboards/mockups/`](dashboards/mo
 
 This project follows the three phases BI project lifecycle from the Google Business Intelligence Certificate :
 
-| Phase    | What was done                                                   | Folder                         |
+| Phase    | What was done | Folder |
 |--------------|-----------------------------------------------------------------|----------------------------------------|
-| **01 Capture**  | Stakeholder requirements, project requirements, strategy doc, ROCCC data quality assessment doc | `docs/`                              |
-| **02 Analyze**  | SQL exploration -> dbt models -> DQ tests                     | `sql/` + `dbt/` |
-| **03 Monitor**  | Dashboards + lo-fi mockups                                | `dashboards/`                          |
+| **01 Capture**  | Stakeholder requirements, project requirements, strategy doc, ROCCC data quality assessment doc | `docs/` |
+| **02 Analyze**  | SQL exploration -> dbt models -> DQ tests | `sql/` + `dbt/` |
+| **03 Monitor**  | Dashboards + lo-fi mockups | `dashboards/` |
 
 For full detail : [`docs/phase_mapping.md`](docs/phase_mapping.md).
 
@@ -168,13 +170,13 @@ For full detail : [`docs/phase_mapping.md`](docs/phase_mapping.md).
 
 ## Tools Used in The Project
 
-| Layer        | Tool                                              | Description                                       |
-|--------------|---------------------------------------------------|-------------------------------------------|
-| Warehouse    | Google BigQuery                                   | Serverless, SQL-first, integrates with GCP|
-| Transform    | dbt-bigquery 1.8.x                                  | SQL-native, version-controlled, testable  |
-| DQ Tests     | dbt-utils, dbt-expectations                       | Great-Expectations-style assertions in dbt|
-| CI/CD        | GitHub Actions                                    | Auto-test on every PR / push to main      |
-| BI           | Tableau / Power BI / Data Studio                  | Same mart, three dashboards               |
+| Layer        | Tool                                              | Description |
+|--------------|---------------------------------------------------| ------------------------------------------- |
+| Warehouse    | Google BigQuery                                   | Serverless, SQL-first, integrates with GCP |
+| Transform    | dbt-bigquery 1.8.x                                  | SQL-native, version-controlled, testable |
+| DQ Tests     | dbt-utils, dbt-expectations                       | Great-Expectations-style assertions in dbt |
+| CI/CD        | GitHub Actions                                    | Auto-test on every PR / push to main |
+| BI           | Tableau / Power BI / Data Studio                  | Same mart, three dashboards |
 | Docs         | Markdown + .docx originals                        | GitHub-rendered + Word for delivery to stakeholder |
 
 ---
@@ -195,8 +197,40 @@ For full detail : [`docs/phase_mapping.md`](docs/phase_mapping.md).
 
 ---
 
+## What's Next ?
+
+### 1. dbt นอกจากพื้นฐานแล้วต่อยอดอะไรได้อีก ?
+
+เมื่อเชี่ยวชาญ concept พื้นฐานแล้ว สามารถขยับไปใช้ feature ขั้นสูงได้อีก :
+
+- **Snapshots** — ติดตามการเปลี่ยนแปลงของข้อมูลตามเวลา (Slowly Changing Dimensions)
+- **Macros & Jinja** — เขียน logic ซ้ำ ๆ ตามหลักการ **modularity** ทำครั้งเดียวแล้วเรียกใช้ได้ทั่วทั้ง project ไม่ต้องมาเขียนซ้ำทุกการสร้าง data model (ในคอร์สมีการสอนพื้นฐานไปบ้างแล้ว)
+- **Packages** — ติดตั้ง library สำเร็จรูปจาก dbt Hub เช่น `dbt_utils`, `dbt_expectations` เพื่อเพิ่ม test และ helper ให้ทันที ไม่ต้องมาเขียน data test from scratch
+- **Incremental Models** — build เฉพาะข้อมูลใหม่ ไม่ต้อง rebuild ทั้งตาราง ลด cost และเวลาได้มากสำหรับการทำ project ที่ข้อมูลมีการไหลเข้าตลอดเวลา
+- **Exposures** — ประกาศว่าโมเดลไหนถูกใช้ใน dashboard หรือ report ไหน เพื่อ track downstream dependency เวลาจะทำการแก้งายปลายน้ำบางงานจะได้ไม่ต้องไปรบกวน pipeline งานอื่น
+- **Semantic Layer** — นิยาม metric (เช่น revenue, churn rate) ในที่เดียว ไม่ต้องเขียนใหม่ทุกครั้ง แล้วเรียกใช้ได้จากทุก BI tool
+- **dbt Cloud + CI/CD** — รัน dbt อัตโนมัติตาม schedule หรือเมื่อมี trigger พร้อม Slim CI ที่ test เฉพาะโมเดลที่เปลี่ยน
+- **dbt Explorer** — visualize lineage graph ทั้ง pipeline ตั้งแต่ source ไปถึง mart ได้ใน UI ช่วยมาก เพราะสามารถดูแผนผังได้ด้วยตาแทนการอ่าน code
+
+### 2. dbt ในงานจริง ?
+
+ในงานจริง dbt ถูกใช้เป็น **backbone ของ data transformation layer** ใน data stack ขององค์กร ไม่ใช่แค่เครื่องมือเขียน SQL สร้างตารางธรรมดา
+
+ทีม **Data/Analytics Engineering** ใช้ dbt เพื่อ **จัดการ pipeline ที่ซับซ้อน** ที่มีโมเดลเป็นร้อยเป็นพัน โดยที่ทุกคนในทีมทำงานบน codebase เดียวกันผ่าน Git — มี version control, code review, และ CI/CD เหมือนทีม Software Engineer แถมยัง scale out ออกได้เยอะมาก
+
+**Case Study :** หากสนใจสามารถอ่าน case studies ได้ที่ [www.getdbt.com/case-studies](https://www.getdbt.com/case-studies) อยากให้อ่าน แล้วจะรู้ว่าเครื่องมือนี้มัน powerful มาก ๆๆๆๆๆๆๆๆๆ ( หนึ่งในบริษัทที่ใช้มี McDonald’s Nordics กับ Nasdaq (ตลาดหลักทรัพย์อิเล็กทรอนิกส์ที่ใหญ่เป็นอันดับ 2 ของสหรัฐฯ) )
+
+## แหล่งเรียนรู้เพิ่มเติม
+
+| SOURCE | LINK |
+| --- | --- |
+| dbt Fundamentals (คอร์สฟรี) | [courses.getdbt.com](https://courses.getdbt.com/courses/fundamentals) |
+| เอกสาร dbt อย่างเป็นทางการ | [docs.getdbt.com](https://docs.getdbt.com/docs/introduction) |
+| Best Practices Guide | [docs.getdbt.com/guides/best-practices](https://docs.getdbt.com/guides/best-practices) |
+| Jaffle Shop reference repo | [github.com/dbt-labs/jaffle_shop](https://github.com/dbt-labs/jaffle_shop) |
+
+---
+
 ## Author
 
 **Pluemprach Dangdee** — Google Business Intelligence Capstone, 2025–2026
-
-**ต้องขอบคุณ Claude ด้วยที่ช่วยสอนผม ช่วยวาดแผนผัง และพาผมทำโดยไม่บ่นซักคำ**
