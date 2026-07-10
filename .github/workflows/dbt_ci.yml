@@ -1,5 +1,5 @@
 # .github/workflows/dbt_ci.yml
-# Auto-run dbt build (run + test) on every push or PR to main.
+# Auto-run dbt build (run + test) on every push or Pull Request to main.
 #
 # Required GitHub repo settings:
 #   Secrets   → GCP_SA_KEY      : full content of the service-account JSON key
@@ -28,7 +28,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install dbt-bigquery
         run: pip install dbt-bigquery==1.8.*
@@ -72,3 +72,12 @@ jobs:
         with:
           name: dbt-run-results
           path: ./dbt/target/run_results.json
+
+      - name: Generate dbt docs
+        run: dbt docs generate
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target
