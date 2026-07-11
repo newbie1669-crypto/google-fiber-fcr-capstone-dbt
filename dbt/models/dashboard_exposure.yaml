@@ -1,0 +1,40 @@
+exposures:
+
+  - name: tableau_dashboard
+    type: dashboard
+    maturity: medium
+    description: >
+      Tableau dashboard.
+
+    depends_on:
+      - ref('mart_fiber_fcr')
+
+    owner:
+      name: Pluemprach Dangdee
+      email: newbie1669@gmail.com
+
+  - name: power_bi_dashboard
+    type: dashboard
+    maturity: medium
+    description: >
+      Power BI dashboard.
+
+    depends_on:
+      - ref('mart_fiber_fcr')
+
+    owner:
+      name: Pluemprach Dangdee
+      email: newbie1669@gmail.com
+
+  - name: data_studio_dashboard
+    type: dashboard
+    maturity: medium
+    description: >
+      Data studio dashboard.
+
+    depends_on:
+      - ref('mart_fiber_fcr')
+
+    owner:
+      name: Pluemprach Dangdee
+      email: newbie1669@gmail.com
