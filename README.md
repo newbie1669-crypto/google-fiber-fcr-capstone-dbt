@@ -1,50 +1,113 @@
-# Google Fiber BI Capstone Project w/ DBT - First Contact Resolution (FCR) Analytics
+# Google Fiber BI Project w/ DBT - First Contact Resolution (FCR) Analytics
 
-[![dbt CI — Google Fiber](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-dbt/actions/workflows/dbt_ci.yml/badge.svg?branch=main&event=push)](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-dbt/actions/workflows/dbt_ci.yml) [![dbt docs](https://img.shields.io/badge/dbt%20docs-live-FF694B?logo=dbt&logoColor=white)](https://newbie1669-crypto.github.io/google-fiber-fcr-capstone-dbt/)
+![dbt CI — Google Fiber](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-dbt/actions/workflows/dbt_ci.yml/badge.svg?branch=main&event=push)
 
-**End-to-end analytics pipeline measuring repeat-caller behavior across three Google Fiber markets.**
+[dbt docs](https://img.shields.io/badge/dbt%20docs-live-FF694B?logo=dbt&logoColor=white)
 
-**Workflow :** BigQuery -> DBT (data build tool) -> Tableau / Power BI / Data Studio (ex-name: Looker studio)
-
-<img src="docs/images/dbt.png" alt="dbt">
+**Very first**, the “—” and “→” symbol often appear because I write my markdown in `Notion` mostly, not because the whole thing is **“AI generated”**.
 
 ---
 
-## อธิบายก่อนเข้าโปรเจค
+## **Note** : Before going into this project
 
-"classic = the analysis; this repo = the production pipeline"
+This project is an extension of `the original capstone project` I completed after finishing `Google Business Intelligence Professional Certificate`. The issue with the original one was it only focused on documentation, scope definition, and dashboard creation — mostly leaning toward the business side than overall BI stuff.
 
-เป็นโปรเจคที่ต่อยอดมาจากตัว [classic project](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-classic) มี logic การเขียน SQL , dataset และ dashboard เหมือนกัน สิ่งที่เพิ่มขึ้นมา คือ การทำ data pipeline ของจริง เป็น ELT ที่มีการ transformation และ test อย่างเป็นระบบ ระบบนี้เป็นแค่ "toy project" แต่สามารถนำมา scale ออกได้จริงด้วยแค่เปลี่ยน data source สามารถ automation การ CI/CD ได้จริง ด้วยเครื่องมือที่เพิ่มเข้ามา คือ DBT (data build tool)
+**What was lack** was an actual deployed `data pipeline`. The original project approach simply loaded CSVs, used SQL `UNION ALL` plus data quality checks, then import the results into a dashboard — **no data pipeline at all. Even data quality testing wasn't a part of the original project’s scope**. What you see in the project is something I added myself.
 
-สำหรับ DBT สั้นๆ มันเป็น framework ที่ทำให้การเขียน SQL กลายเป็นเหมือน data engineering จริงๆ - เขียน model เป็น .sql ไฟล์, เขียน config หรือ การตั้งค่าระบบ pipeline เป็น .yaml ไฟล์,  test, document และ run ทีเดียวทั้ง pipeline ศึกษาเพิ่มเติมได้ที่ [getdbt.com](https://www.getdbt.com/) มีคอร์สเรียนฟรีด้วย ถือเป็นเครื่องมือที่ทรงพลังมากเวลาใช้กับพวก modern data stack (ฺGoogle BigQuery, Databricks, Snowflake, Amazon Redshift, etc.) เพื่อทำงาน Business intelligence หรือ Analytics engineering
+This project builds on that original work to make it complete, as a real BI project should be.
+
+- **Google Fiber Classic** = the original capstone project
+- **This project** = the original, plus production with a (real) pipeline
+
+If you wonder what original capstone project look like. You can view my original project at `this link` , or just search `Google Business Intelligence Professional Certificate Case Study Google Fiber` on Google — plenty of people have done this same project already.
+
+---
+
+## **Prerequisites**
+
+1. Basic data analytics knowledge
+2. Understanding of BI concepts
+3. Basic SQL and a few more advanced concepts like `CTEs` and `data manipulation`
+4. Concept of these things — `Data pipeline`, `ETL`, `ELT`, `Staging vs Mart`, `OLAP vs OLTP`, `Database`, `Data warehouse`
+5. **dbt Fundamentals course** ( **highly recommended !!!** — it covers every basic you need so you'll automatically understand everything written in this project )
+
+---
+
+## Workflow (in a nutshell)
+
+`BigQuery`→ `dbt`→`BI tools` ——— ( very simple, a whole project is basically working with these three things!!!)
+
+---
+
+## DBT ?
+
+`dbt` or `data build tool` is the industry-standard framework for the transformation step in an `ELT` process — this project assumes we're working on a `modern data platform` (`Snowflake`, `BigQuery`, `S3`, `Databricks`) or an `OLAP database` like `DuckDB`, where data has already been extracted and loaded into our data warehouse or database.
+
+As `BI Analyst` or `BI engineer` or `Analytics Engineers`, our job is to **take this raw data, transform it, and turn it into deliverables** for business users.
+
+**In this case here**, this means
+
+> **using dbt to build the pipeline that feeds into dashboards** for stakeholders.
 
 ---
 
 ## Background
 
-Google Fiber's customer service team wants to **reduce repeat calls** and improve first-contact resolution. The business question:
+**Google Fiber** operates a fiber optic internet service business. In this type of business, customers periodically report issues through phone calls, either to report problems or ask for guidance.
 
-> **"How often are customers repeatedly contacting customer service after their first call - and what problem types or markets drive that behavior ?"**
+**Google Fiber's customer service team** wants to reduce repeat calls and improve first-contact resolution. To achieve this, they first need to understand the repeat call rate and identify the most common issues customers call about — so they can address problems proactively, prepare for on-the-spot troubleshooting, and improve Google Fiber's overall service quality.
 
-Source: Google Business Intelligence Professional Certificate - Case Study 2 (Google Fiber).
+The business question:
+
+> **“ How often are customers repeatedly contacting customer service after their first call - and what problem types or markets drive that behavior ? ”**
+
+## Dataset
+
+use `this` dataset — See `here` for full detail if you have some question like
+
+- Does this project have new data refresh ?
+- Why no customer personal info ?
+- why does data ... ???
 
 ## Project Delivers
 
-1. **Data transformation layer** that turns three raw call-center tables (for 3 markets) into a single, tested FCR mart
-2. **Data quality tests** (12+ assertions covering nulls, ranges, accepted values, uniqueness) wired into CI
-3. **Three dashboards** (Tableau, Power BI, Data Studio) connected to BigQuery by the same data pipeline
+1. **Data transformation layer** that turns three raw call-center tables (for 3 markets) into a single, tested mart table ready to be used
+2. **Data quality tests** (12+ assertions covering nulls, ranges, accepted values, uniqueness)
+3. **Three dashboards** (Tableau, Power BI, Data Studio) connected to BigQuery by the same data pipeline — show metrics and how is going on customer call
 4. **Documentation** of the project including :
 
-        - Stakeholder requirement
-        - Project requirement
-        - Strategy doc
-        - ROCCC data quility assessment doc
+    ```plain text
+    - Stakeholder requirement
+    - Project requirement
+    - Strategy doc
+    - ROCCC data quility assessment doc
+    ```
+
+---
+
+## Result and Recommendation
+
+- We have a data pipeline with the `lineage` shown below, connected from source data on Google BigQuery
+- Data has been validated and quality-checked, ready for use
+- Deployed via `GitHub Actions` with a **status badge** confirming the pipeline runs successfully — proof that the code isn't broken and can be worked on collaboratively with others in the same codebase, not just run locally in my computer
+- Hosted `dbt docs site` where you can view model and pipeline descriptions
+- A dashboard connected to real data on the warehouse ( this repo only includes Data Studio, which connects live to BigQuery — other dashboard tools would require uploading files to the repo, forcing a switch to import mode with embedded data; otherwise anyone wouldn't be able to view it )
+- Summary deck for stakeholders with few recommentdation and some valuation — `link`
+
+---
+
+## **How I Did It (simplified)**
+
+- Installed `dbt`,  `dbt VS Code extension` (since I worked in VS Code), `dbt BigQuery plug-in`, and a few `dbt packages`. (note: I already had a BigQuery account set up with Google Fiber data — if you don't, set this up first.)
+- Connected `dbt` to `BigQuery` via a `service account` and set up the profile (don't worry, just ask AI or check the documentation for this).
+- Created a dbt project → built models and tests... blah blah... as you can see in this repo → built the models into BigQuery (AI can help a lot).
+- At this point, you'll have `mart table` in BigQuery, which you can then connect to a BI tool → build the dashboard.
 
 ---
 
 ## Architecture
 
-```text
+```plain text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                                                                     │
 │   ┌──────────────────┐         ┌──────────────────┐                 │
@@ -84,102 +147,39 @@ See [`docs/architecture.md`](docs/architecture.md) for the full diagram and rati
 
 ## Repository Layout
 
-```text
+```plain text
 google-fiber-fcr-capstone/
-├── .github/workflows/      CI: auto-run dbt on push to main
-├── docs/                   Requirements, ROCCC, architecture, data dictionary
-├── data/samples/           Reference CSV (sanitized)
+├── .github/workflows/      CI: auto-run dbt on push to main and hosting dbt docs site
+├── docs/                   Requirements, ROCCC doc, architecture, data dictionary
+├── data/samples/           Reference CSV
 ├── sql/                    Legacy raw SQL (pre-dbt, kept for reference)
 ├── dbt/                    Production transformation layer
 │   ├── models/staging/         3 staging views (one per market)
 │   ├── models/marts/           mart_fiber_fcr (final table)
-│   ├── macros/                 generate_dq_summary
-│   └── analyses/               ad-hoc DQ summary
+│   ├── macros/                 generate data quality summary
+│   └── analyses/               ad-hoc data quality summary
 ├── dashboards/             3 BI versions on the same mart
 │   ├── tableau/
 │   ├── powerbi/
 │   ├── data_studio/
-│   └── mockups/                lo-fi mockups from design phase
-└── README.md               You are here
+│   └── mockups/            lo-fi mockups from design phase
+└── README.md
 ```
 
 Every choice maps to an established standard (dbt Labs structure guide, Twelve-Factor App, Cookiecutter Data Science).
 
 ---
 
-## Key Metrics Built by the Pipeline
-
-The `mart_fiber_fcr` table exposes these columns for any BI tool:
-
-| Column                      | Type   | Meaning                                                                       |
-|-----------------------------|--------|-------------------------------------------------------------------------------|
-| `date_created`              | DATE   | First-contact date                                                            |
-| `new_market`                | STRING | `MARKET_1` / `MARKET_2` / `MARKET_3`                                          |
-| `new_type`                  | STRING | Problem type (technician, internet/wifi, phone, cable, charges)               |
-| `contacts_n`                | INT    | First contacts on `date_created`                                              |
-| `contacts_n_1` … `_n_7`     | INT    | Repeat contacts 1-7 days later                                                |
-| **`fcr_day1_rate`**         | FLOAT  | **% of customers not calling back the next day** (primary KPI)                |
-| **`fcr_7day_rate`**         | FLOAT  | **% of customers not calling back within 7 days** (secondary KPI)             |
-| `repeat_rate_day1` … `_7`   | FLOAT  | Repeat rate at each day-lag (for decay curves)(*optional I didn't use it either)                      |
-
-Full schema: [`docs/data_dictionary.md`](docs/data_dictionary.md).
-
----
-
-## Data Quality Testing
-
-Twelve+ tests run on every push via GitHub Actions. They map to the seven CHECKs of the original analysis:
-
-| NO. | Coverage                                | dbt test                                   |
-|-------|-----------------------------------------|--------------------------------------------|
-| 1     | Row counts by market                    | `dbt run` + BigQuery review                |
-| 2     | NULL checks on key columns              | `not_null`                                 |
-| 3     | Composite uniqueness `(date, type, mkt)`| `dbt_utils.unique_combination_of_columns`  |
-| 4     | Date range sanity                       | `dbt_expectations.expect_column_values_to_be_between` |
-| 5     | No negative contact counts              | `dbt_utils.expression_is_true: ">= 0"`     |
-| 6     | Categorical values match enum           | `accepted_values`                          |
-| 7     | Aggregate DQ summary                    | `analyses/dq_summary_report.sql`           |
-
----
-
-## Dashboards
-
-Three independent dashboards backed by the same `mart_fiber_fcr` table - pick the BI tool of your choice.
-
-| BI Tool             | Status                | Folder                                    |
-|---------------------|-----------------------|-------------------------------------------|
-| **Tableau**         | ✅ Built (.twbx)      | [`dashboards/tableau/`](dashboards/tableau/)             |
-| **Power BI**        | ✅ Built (.pbix)      | [`dashboards/powerbi/`](dashboards/powerbi/)             |
-| **Data Studio**   | ✅ Built (Data Studio)      | [`dashboards/data_studio/`](dashboards/data_studio/) |
-
-Lo-fidelity mockups from the design phase: [`dashboards/mockups/`](dashboards/mockups/).
-
----
-
-## Project Phases
-
-This project follows the three phases BI project lifecycle from the Google Business Intelligence Certificate :
-
-| Phase    | What was done | Folder |
-|--------------|-----------------------------------------------------------------|----------------------------------------|
-| **01 Capture**  | Stakeholder requirements, project requirements, strategy doc, ROCCC data quality assessment doc | `docs/` |
-| **02 Analyze**  | SQL exploration -> dbt models -> DQ tests | `sql/` + `dbt/` |
-| **03 Monitor**  | Dashboards + lo-fi mockups | `dashboards/` |
-
-For full detail : [`docs/phase_mapping.md`](docs/phase_mapping.md).
-
----
-
 ## Tools Used in The Project
 
-| Layer        | Tool                                              | Description |
-|--------------|---------------------------------------------------| ------------------------------------------- |
-| Warehouse    | Google BigQuery                                   | Serverless, SQL-first, integrates with GCP |
-| Transform    | dbt-bigquery 1.8.x                                  | SQL-native, version-controlled, testable |
-| DQ Tests     | dbt-utils, dbt-expectations                       | Great-Expectations-style assertions in dbt |
-| CI/CD        | GitHub Actions                                    | Auto-test on every PR / push to main |
-| BI           | Tableau / Power BI / Data Studio                  | Same mart, three dashboards |
-| Docs         | Markdown + .docx originals                        | GitHub-rendered + Word for delivery to stakeholder |
+| Layer | Tool | Description |
+| --- | --- | --- |
+| Warehouse | Google BigQuery | Serverless, SQL-first, integrates with GCP |
+| Transform | dbt-bigquery 1.8.x | SQL-native, version-controlled, testable |
+| Data quality tests | dbt-utils, dbt-expectations | Great-Expectations-style assertions in dbt |
+| CI/CD | GitHub Actions | Auto-test on every PR / push to main |
+| BI | Tableau / Power BI / Data Studio | Same mart, three dashboards |
+| Docs | Markdown + .docx originals | GitHub-rendered + Word for delivery to stakeholder |
 
 ---
 
@@ -199,40 +199,42 @@ For full detail : [`docs/phase_mapping.md`](docs/phase_mapping.md).
 
 ---
 
-## What's Next ?
+## **What's Next?**
 
-### 1. dbt นอกจากพื้นฐานแล้วต่อยอดอะไรได้อีก ?
+### **1. Beyond the basics, what else can dbt do?**
 
-เมื่อเชี่ยวชาญ concept พื้นฐานแล้ว สามารถขยับไปใช้ feature ขั้นสูงได้อีก :
+Once you've mastered the core concepts, you can move on to more advanced features:
 
-- **Snapshots** — ติดตามการเปลี่ยนแปลงของข้อมูลตามเวลา (Slowly Changing Dimensions)
-- **Macros & Jinja** — เขียน logic ซ้ำ ๆ ตามหลักการ **modularity** ทำครั้งเดียวแล้วเรียกใช้ได้ทั่วทั้ง project ไม่ต้องมาเขียนซ้ำทุกการสร้าง data model (ในคอร์สมีการสอนพื้นฐานไปบ้างแล้ว)
-- **Packages** — ติดตั้ง library สำเร็จรูปจาก dbt Hub เช่น `dbt_utils`, `dbt_expectations` เพื่อเพิ่ม test และ helper ให้ทันที ไม่ต้องมาเขียน data test from scratch
-- **Incremental Models** — build เฉพาะข้อมูลใหม่ ไม่ต้อง rebuild ทั้งตาราง ลด cost และเวลาได้มากสำหรับการทำ project ที่ข้อมูลมีการไหลเข้าตลอดเวลา
-- **Exposures** — ประกาศว่าโมเดลไหนถูกใช้ใน dashboard หรือ report ไหน เพื่อ track downstream dependency เวลาจะทำการแก้งายปลายน้ำบางงานจะได้ไม่ต้องไปรบกวน pipeline งานอื่น
-- **Semantic Layer** — นิยาม metric (เช่น revenue, churn rate) ในที่เดียว ไม่ต้องเขียนใหม่ทุกครั้ง แล้วเรียกใช้ได้จากทุก BI tool
-- **dbt Cloud + CI/CD** — รัน dbt อัตโนมัติตาม schedule หรือเมื่อมี trigger พร้อม Slim CI ที่ test เฉพาะโมเดลที่เปลี่ยน
-- **dbt Explorer** — visualize lineage graph ทั้ง pipeline ตั้งแต่ source ไปถึง mart ได้ใน UI ช่วยมาก เพราะสามารถดูแผนผังได้ด้วยตาแทนการอ่าน code
+- **Macros & Jinja** — write reusable logic following modularity principles; write it once and call it anywhere in the project, instead of rewriting the same logic for every model
+- **Packages** — install ready-made libraries from `dbt Hub`, such as `dbt_utils` and `dbt_expectations`, to instantly add tests and helpers without writing data tests from scratch — **this project use these packages too !!!**
+- **Incremental Models** — build only new data instead of rebuilding the entire table, significantly reducing cost and runtime for projects with **continuously flowing data**
+- **Exposures** — declare which models feed into which dashboards or reports, to track downstream dependencies — so when making changes downstream, you won't accidentally disrupt other pipelines — **this project has this feature**
+- **Snapshots** — track how data changes over time (Slowly Changing Dimensions)
+- **Semantic Layer** — define metrics (e.g., revenue, churn rate) once in a single place instead of rewriting them repeatedly, then reuse them across any BI tool — **it unnecessary for such a small project like this project but once you scale out you’ll need it**
+- **dbt Cloud + CI/CD** — run dbt automatically on a schedule or via triggers, with Slim CI that only tests models that have changed — this project use `GitHub Action` to fill this role. It trigger by every `push` to GitHub
 
-### 2. dbt ในงานจริง ?
+### **2. How is dbt used in real-world work?**
 
-ในงานจริง dbt ถูกใช้เป็น **backbone ของ data transformation layer** ใน data stack ขององค์กร ไม่ใช่แค่เครื่องมือเขียน SQL สร้างตารางธรรมดา
+In practice, `dbt` is industry gold standard, serves as the backbone of the data transformation layer ( E L " **T** ") within an organization's data stack — far more than just a tool for writing SQL to create tables — every thing about transformation done by dbt.
 
-ทีม **Data/Analytics Engineering** ใช้ dbt เพื่อ **จัดการ pipeline ที่ซับซ้อน** ที่มีโมเดลเป็นร้อยเป็นพัน โดยที่ทุกคนในทีมทำงานบน codebase เดียวกันผ่าน Git — มี version control, code review, และ CI/CD เหมือนทีม Software Engineer แถมยัง scale out ออกได้เยอะมาก
+Data/Analytics Engineering and BI teams use dbt to manage complex pipelines with hundreds or even thousands of models, with everyone on the team working from the same codebase via `Git` — complete with version control, code review, and CI/CD, just like a software engineering team. This allows the pipeline to scale.
 
-**Case Study :** หากสนใจสามารถอ่าน case studies ได้ที่ [www.getdbt.com/case-studies](https://www.getdbt.com/case-studies) อยากให้อ่าน แล้วจะรู้ว่าเครื่องมือนี้มัน powerful มาก ๆๆๆๆๆๆๆๆๆ ( หนึ่งในบริษัทที่ใช้มี McDonald’s Nordics กับ Nasdaq (ตลาดหลักทรัพย์อิเล็กทรอนิกส์ที่ใหญ่เป็นอันดับ 2 ของสหรัฐฯ) )
+### **Case Study**
 
-## แหล่งเรียนรู้เพิ่มเติม
+If you're interested, you can read case studies at [www.getdbt.com/case-studies](https://www.getdbt.com/case-studies). I highly recommend to reading them — see how powerful the tool really is. Companies using dbt include **McDonald's Nordics** and **Nasdaq** (the second-largest electronic stock exchange in the US).
+
+## **Additional Resources**
 
 | SOURCE | LINK |
 | --- | --- |
-| dbt Fundamentals (คอร์สฟรี) | [courses.getdbt.com](https://courses.getdbt.com/courses/fundamentals) |
-| เอกสาร dbt อย่างเป็นทางการ | [docs.getdbt.com](https://docs.getdbt.com/docs/introduction) |
+| dbt Fundamentals (free course) | [courses.getdbt.com](https://courses.getdbt.com/courses/fundamentals) |
+| official dbt document | [docs.getdbt.com](https://docs.getdbt.com/docs/introduction) |
 | Best Practices Guide | [docs.getdbt.com/guides/best-practices](https://docs.getdbt.com/guides/best-practices) |
-| Jaffle Shop reference repo | [github.com/dbt-labs/jaffle_shop](https://github.com/dbt-labs/jaffle_shop) |
 
 ---
 
 ## Author
 
-**Pluemprach Dangdee** — Google Business Intelligence Capstone, 2025–2026
+**Pluemprach Dangdee** - 2026
+
+**License** : [`LICENSE`](LICENSE)
