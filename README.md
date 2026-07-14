@@ -1,10 +1,8 @@
 # Google Fiber BI Project w/ DBT - First Contact Resolution (FCR) Analytics
 
-![dbt CI — Google Fiber](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-dbt/actions/workflows/dbt_ci.yml/badge.svg?branch=main&event=push)
+![dbt CI — Google Fiber](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-dbt/actions/workflows/dbt_ci.yml/badge.svg?branch=main&event=push) ![dbt docs](https://img.shields.io/badge/dbt%20docs-live-FF694B?logo=dbt&logoColor=white)
 
-![dbt docs](https://img.shields.io/badge/dbt%20docs-live-FF694B?logo=dbt&logoColor=white)
-
-**Very first**, the “—” and “→” symbol often appear because I write my markdown in `Notion` mostly, not because the whole thing is **“ A.I. g e n e r a t e d ”**.
+**Very first**, the “—” and “→” symbol often appear because I write my markdown in `Notion` mostly, not because the whole thing is **“ AI g e n e r a t e d ”**.
 
 ---
 
@@ -45,7 +43,7 @@ If you wonder what original capstone project look like. You can view my original
 
 `dbt` or `data build tool` is the industry-standard framework for the transformation step in an `ELT` process — this project assumes we're working on a `modern data platform` (`Snowflake`, `BigQuery`, `Redshift`, `Databricks`) or an `OLAP database` like `DuckDB`, where data has already been extracted and loaded into our data warehouse or database.
 
-As `BI Analyst` or `BI engineer` or `Analytics Engineers` (in this fictional project) a job is to **take this raw data, transform it, and turn it into deliverables** for business users.
+As `BI analyst` or `BI engineer` or `Analytics engineers` (in this fictional project) a job is to **take this raw data, transform it, and turn it into deliverables** for business users.
 
 **In this case here**, this means
 
@@ -61,7 +59,7 @@ As `BI Analyst` or `BI engineer` or `Analytics Engineers` (in this fictional pro
 
 **Google Fiber's customer service team** wants to reduce repeat calls and improve first-contact resolution. To achieve this, they first need to understand the repeat call rate and identify the most common issues customers call about — so they can address problems proactively, prepare for on-the-spot troubleshooting, and improve Google Fiber's overall service quality.
 
-The business question:
+The business question the dashboard have to answer:
 
 > **“ How often are customers repeatedly contacting customer service after their first call - and what problem types or markets drive that behavior ? ”**
 
@@ -113,7 +111,7 @@ This project uses the dataset from the Google Fiber capstone project, which reco
 - Deployed via `GitHub Actions` with a **status badge** confirming the pipeline runs successfully — proof that the code isn't broken and can be worked on collaboratively with others in the same codebase, not just run locally in my computer
 - Hosted `dbt docs site` where you can view model and pipeline descriptions
 - A dashboard connected to real data on the warehouse ( this repo **only Data Studio dashboard connects live to BigQuery** — other dashboard tools would require uploading files to the repo, forcing a switch to import mode with embedded data otherwise anyone wouldn't be able to view it )
-- **Summary deck** for stakeholders with  **recommentdations** and **valuation** — `[summary deck](docs/)`
+- **Summary deck** for stakeholders with  **recommentdations** and **valuation** — ![`Coming soon`](docs/)
 
 ---
 
@@ -206,8 +204,8 @@ Every choice maps to an established standard (dbt Labs structure guide, Twelve-F
 
 - [`docs/data_dictionary.md`](docs/data_dictionary.md) - every column explained
 - [`docs/architecture.md`](docs/architecture.md) - pipeline & structure rationale
-- [`docs/phase_mapping.md`](docs/phase_mapping.md) - GBI phase <-> folder mapping
-- [`dbt/README.md`](dbt/README.md) - dbt project usage guide
+- [`docs/phase_mapping.md`](docs/phase_mapping.md) - BI phase <-> folder mapping
+- [`dbt/README.md`](dbt/README.md) - about the dbt project
 
 ---
 
