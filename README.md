@@ -4,7 +4,7 @@
 
 ![dbt docs](https://img.shields.io/badge/dbt%20docs-live-FF694B?logo=dbt&logoColor=white)
 
-**Very first**, the “—” and “→” symbol often appear because I write my markdown in `Notion` mostly, not because the whole thing is **“ A. I. g e n e r a t e d ”**.
+**Very first**, the “—” and “→” symbol often appear because I write my markdown in `Notion` mostly, not because the whole thing is **“ A.I. g e n e r a t e d ”**.
 
 ---
 
