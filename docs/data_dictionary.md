@@ -4,7 +4,7 @@ Schema of all tables in the pipeline.
 
 ---
 
-## Raw Source - `gbi-test.fiber.market_{1,2,3}`
+## Raw Source - `gbi-test.fiber.market_{1,2,3}` (in my BigQuery)
 
 Three tables, same schema, one per market.
 

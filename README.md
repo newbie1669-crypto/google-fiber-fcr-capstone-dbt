@@ -33,13 +33,13 @@ If you wonder what original capstone project look like. You can view my original
 
 ---
 
-## Workflow (in a nutshell)
+## **Workflow (in a nutshell)**
 
 `BigQuery`→ `dbt`→`BI tools` ——— ( very simple, a whole project is basically working with these three things!!!)
 
 ---
 
-## DBT ?
+## **DBT ?**
 
 ![DBT](docs/images/dbt.png)
 
@@ -53,7 +53,7 @@ As `BI Analyst` or `BI engineer` or `Analytics Engineers` (in this fictional pro
 
 ---
 
-## Background
+## **Background**
 
 ![repeat call](docs/images/phone.png)
 
@@ -65,7 +65,7 @@ The business question:
 
 > **“ How often are customers repeatedly contacting customer service after their first call - and what problem types or markets drive that behavior ? ”**
 
-## Project Delivers
+## **Project Delivers**
 
 1. **Data transformation layer** that turns three raw call-center tables (for 3 markets) into a single, tested mart table ready to be used
 2. **Data quality tests** (12+ assertions covering nulls, ranges, accepted values, uniqueness)
@@ -81,7 +81,29 @@ The business question:
 
 ---
 
-## Result and Recommendation
+## **Dataset**
+
+This project uses the dataset from the Google Fiber capstone project, which records number of calls by date, market, and problem type — see the `data dictionary` for details.
+
+**Note:** This is a fictional dataset intended for practice purpose. It has the following limitations:
+
+1. Static — no new data is being ingested
+2. Small in size — still far from actual production scale
+3. Covers only a 3-month period — trend analysis is of limited value
+4. No customer information — it only contains call-related data
+
+---
+
+## **How I Did It (simplified)**
+
+- Installed `dbt`,  `dbt VS Code extension` (since I worked in VS Code), `dbt BigQuery plug-in`, and a few `dbt packages`. (note: I already had a BigQuery account set up with Google Fiber data — if you don't, set this up first.)
+- Connected `dbt` to `BigQuery` via a `service account` and set up the profile (don't worry, just ask AI or check the documentation for this).
+- Created a dbt project → built models and tests... blah blah... as you can see in this repo → built the models into BigQuery (AI can help as well during development).
+- At this point, you'll have `mart table` in BigQuery, which you can then connect to a BI tool → build the dashboard.
+
+---
+
+## **Result and Recommendations**
 
 - We have a data pipeline with the `lineage` shown below, connected from source data on Google BigQuery
 
@@ -95,16 +117,7 @@ The business question:
 
 ---
 
-## **How I Did It (simplified)**
-
-- Installed `dbt`,  `dbt VS Code extension` (since I worked in VS Code), `dbt BigQuery plug-in`, and a few `dbt packages`. (note: I already had a BigQuery account set up with Google Fiber data — if you don't, set this up first.)
-- Connected `dbt` to `BigQuery` via a `service account` and set up the profile (don't worry, just ask AI or check the documentation for this).
-- Created a dbt project → built models and tests... blah blah... as you can see in this repo → built the models into BigQuery (AI can help a lot).
-- At this point, you'll have `mart table` in BigQuery, which you can then connect to a BI tool → build the dashboard.
-
----
-
-## Architecture
+## **Architecture**
 
 ```plain text
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -144,7 +157,7 @@ See [`docs/architecture.md`](docs/architecture.md) for the full diagram and rati
 
 ---
 
-## Repository Layout
+## **Repository Layout**
 
 ```plain text
 google-fiber-fcr-capstone/
@@ -169,7 +182,7 @@ Every choice maps to an established standard (dbt Labs structure guide, Twelve-F
 
 ---
 
-## Tools Used in The Project
+## **Tools Used in The Project**
 
 | Layer | Tool | Description |
 | --- | --- | --- |
@@ -182,14 +195,14 @@ Every choice maps to an established standard (dbt Labs structure guide, Twelve-F
 
 ---
 
-### Deliverables documentation (for stakeholder)
+### **Deliverables documentation (for stakeholder)**
 
 - [`docs/01_stakeholder_requirements.md`](docs/01_stakeholder_requirements.md) - what the business asked for
 - [`docs/02_project_requirements.md`](docs/02_project_requirements.md) - scoped & prioritized requirements
 - [`docs/03_strategy_document.md`](docs/03_strategy_document.md) - dashboard spec: the four charts to build
 - [`docs/04_roccc_data_assessment.md`](docs/04_roccc_data_assessment.md) - data quality evaluation
 
-### Reference documentation (for detail)
+### **Reference documentation (for detail)**
 
 - [`docs/data_dictionary.md`](docs/data_dictionary.md) - every column explained
 - [`docs/architecture.md`](docs/architecture.md) - pipeline & structure rationale
@@ -233,7 +246,7 @@ If you're interested, you can read case studies at [**`www.getdbt.com/case-studi
 
 ---
 
-## Author
+## **Author and License**
 
 **Pluemprach Dangdee** - 2026
 
