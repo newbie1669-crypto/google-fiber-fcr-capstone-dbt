@@ -8,7 +8,7 @@
 
 ## **Note** : Before going into this project
 
-This project is an extension of `the original capstone project` I completed after finishing `Google Business Intelligence Professional Certificate`. The issue with the original one was it only focused on documentation, scope definition, and dashboard creation — mostly leaning toward the business side than overall BI stuff.
+This project is an extension of [`Google Fiber FCR Capstone Classic`](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-classic) I completed after finishing [`Google Business Intelligence Professional Certificate`](https://www.coursera.org/professional-certificates/google-business-intelligence). The issue with the original one was it only focused on documentation, scope definition, and dashboard creation — mostly leaning toward the business side than overall BI stuff.
 
 **What was lack** was an actual deployed `data pipeline`. The original project approach simply loaded CSVs, used SQL `UNION ALL` plus data quality checks, then import the results into a dashboard — **no data pipeline at all. Even data quality testing wasn't a part of the original project’s scope**. What you see in the project is something I added myself.
 
@@ -17,7 +17,7 @@ This project builds on that original work to make it complete, as a real BI proj
 - **Google Fiber Classic** = the original capstone project
 - **This project** = the original, plus production with a (real) pipeline
 
-If you wonder what original capstone project look like. You can view my original project at `this link` , or just search `Google Business Intelligence Professional Certificate Case Study Google Fiber` on Google — plenty of people have done this same project already.
+If you wonder what original capstone project look like. You can view my original project at [`This Link`](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-classic) , or just search `Google business intelligence google fiber case study` on Google — plenty of people have done this project already.
 
 ---
 
@@ -26,14 +26,14 @@ If you wonder what original capstone project look like. You can view my original
 1. Basic data analytics knowledge
 2. Understanding of BI concepts
 3. Basic SQL and a few more advanced concepts like `CTEs` and `data manipulation`
-4. Concept of these things — `Data pipeline`, `ETL`, `ELT`, `Staging vs Mart`, `OLAP vs OLTP`, `Database`, `Data warehouse`
-5. **dbt Fundamentals course** ( **highly recommended !!!** — it covers every basic you need so you'll automatically understand everything written in this project )
+4. Concept of these things — `Data pipeline`, `ETL`, `ELT`, `Staging vs Mart`, `Table vs View materialization`, `OLAP vs OLTP`, `Database`, `Data warehouse`
+5. **[dbt Fundamentals course](https://learn.getdbt.com/learn/course/dbt-fundamentals-vs-code)** ( **highly recommended !** — it covers every basic you need so you'll automatically understand everything written in this project )
 
 ---
 
 ## **Workflow (in a nutshell)**
 
-`BigQuery`→ `dbt`→`BI tools` ——— ( very simple, a whole project is basically working with these three things!!!)
+`BigQuery` → `dbt` → `BI tools` ——— ( very simple, a whole project is basically working around these three things )
 
 ---
 
@@ -81,7 +81,7 @@ The business question the dashboard have to answer:
 
 ## **Dataset**
 
-This project uses the dataset from the Google Fiber capstone project, which records number of calls by date, market, and problem type — see the `data dictionary` for details.
+This project uses the dataset from the Google Fiber capstone project, which records number of calls by date, market, and problem type — see the [`data dictionary`](docs\data_dictionary.md) for details.
 
 **Note:** This is a fictional dataset intended for practice purpose. It has the following limitations:
 
@@ -111,7 +111,7 @@ This project uses the dataset from the Google Fiber capstone project, which reco
 - Deployed via `GitHub Actions` with a **status badge** confirming the pipeline runs successfully — proof that the code isn't broken and can be worked on collaboratively with others in the same codebase, not just run locally in my computer
 - Hosted `dbt docs site` where you can view model and pipeline descriptions
 - A dashboard connected to real data on the warehouse ( this repo **only Data Studio dashboard connects live to BigQuery** — other dashboard tools would require uploading files to the repo, forcing a switch to import mode with embedded data otherwise anyone wouldn't be able to view it )
-- **Summary deck** for stakeholders with  **recommentdations** and **valuation** — ![`Coming soon`](docs/)
+- **Summary deck** for stakeholders with  **recommentdations** and **valuation** — [`Coming soon`](docs/)
 
 ---
 
@@ -238,7 +238,7 @@ If you're interested, you can read case studies at [**`www.getdbt.com/case-studi
 
 | SOURCE | LINK |
 | --- | --- |
-| dbt Fundamentals (free course) | [courses.getdbt.com](https://courses.getdbt.com/courses/fundamentals) |
+| dbt Learn (free course) | [learn.getdbt.com](https://learn.getdbt.com/catalog) |
 | official dbt document | [docs.getdbt.com](https://docs.getdbt.com/docs/introduction) |
 | Best Practices Guide | [docs.getdbt.com/guides/best-practices](https://docs.getdbt.com/guides/best-practices) |
 
