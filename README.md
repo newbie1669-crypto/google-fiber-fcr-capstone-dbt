@@ -2,9 +2,9 @@
 
 ![dbt CI — Google Fiber](https://github.com/newbie1669-crypto/google-fiber-fcr-capstone-dbt/actions/workflows/dbt_ci.yml/badge.svg?branch=main&event=push)
 
-[dbt docs](https://img.shields.io/badge/dbt%20docs-live-FF694B?logo=dbt&logoColor=white)
+![dbt docs](https://img.shields.io/badge/dbt%20docs-live-FF694B?logo=dbt&logoColor=white)
 
-**Very first**, the “—” and “→” symbol often appear because I write my markdown in `Notion` mostly, not because the whole thing is **“AI generated”**.
+**Very first**, the “—” and “→” symbol often appear because I write my markdown in `Notion` mostly, not because the whole thing is **“ A. I. g e n e r a t e d ”**.
 
 ---
 
@@ -41,9 +41,11 @@ If you wonder what original capstone project look like. You can view my original
 
 ## DBT ?
 
-`dbt` or `data build tool` is the industry-standard framework for the transformation step in an `ELT` process — this project assumes we're working on a `modern data platform` (`Snowflake`, `BigQuery`, `S3`, `Databricks`) or an `OLAP database` like `DuckDB`, where data has already been extracted and loaded into our data warehouse or database.
+![DBT](docs/images/dbt.png)
 
-As `BI Analyst` or `BI engineer` or `Analytics Engineers`, our job is to **take this raw data, transform it, and turn it into deliverables** for business users.
+`dbt` or `data build tool` is the industry-standard framework for the transformation step in an `ELT` process — this project assumes we're working on a `modern data platform` (`Snowflake`, `BigQuery`, `Redshift`, `Databricks`) or an `OLAP database` like `DuckDB`, where data has already been extracted and loaded into our data warehouse or database.
+
+As `BI Analyst` or `BI engineer` or `Analytics Engineers` (in this fictional project) a job is to **take this raw data, transform it, and turn it into deliverables** for business users.
 
 **In this case here**, this means
 
@@ -53,6 +55,8 @@ As `BI Analyst` or `BI engineer` or `Analytics Engineers`, our job is to **take 
 
 ## Background
 
+![repeat call](docs/images/phone.png)
+
 **Google Fiber** operates a fiber optic internet service business. In this type of business, customers periodically report issues through phone calls, either to report problems or ask for guidance.
 
 **Google Fiber's customer service team** wants to reduce repeat calls and improve first-contact resolution. To achieve this, they first need to understand the repeat call rate and identify the most common issues customers call about — so they can address problems proactively, prepare for on-the-spot troubleshooting, and improve Google Fiber's overall service quality.
@@ -60,14 +64,6 @@ As `BI Analyst` or `BI engineer` or `Analytics Engineers`, our job is to **take 
 The business question:
 
 > **“ How often are customers repeatedly contacting customer service after their first call - and what problem types or markets drive that behavior ? ”**
-
-## Dataset
-
-use `this` dataset — See `here` for full detail if you have some question like
-
-- Does this project have new data refresh ?
-- Why no customer personal info ?
-- why does data ... ???
 
 ## Project Delivers
 
@@ -88,11 +84,14 @@ use `this` dataset — See `here` for full detail if you have some question like
 ## Result and Recommendation
 
 - We have a data pipeline with the `lineage` shown below, connected from source data on Google BigQuery
+
+![dbt lineage](docs/images/fiber_dbt_lineage.png)
+
 - Data has been validated and quality-checked, ready for use
 - Deployed via `GitHub Actions` with a **status badge** confirming the pipeline runs successfully — proof that the code isn't broken and can be worked on collaboratively with others in the same codebase, not just run locally in my computer
 - Hosted `dbt docs site` where you can view model and pipeline descriptions
-- A dashboard connected to real data on the warehouse ( this repo only includes Data Studio, which connects live to BigQuery — other dashboard tools would require uploading files to the repo, forcing a switch to import mode with embedded data; otherwise anyone wouldn't be able to view it )
-- Summary deck for stakeholders with few recommentdation and some valuation — `link`
+- A dashboard connected to real data on the warehouse ( this repo **only Data Studio dashboard connects live to BigQuery** — other dashboard tools would require uploading files to the repo, forcing a switch to import mode with embedded data otherwise anyone wouldn't be able to view it )
+- **Summary deck** for stakeholders with  **recommentdations** and **valuation** — `[summary deck](docs/)`
 
 ---
 
@@ -206,22 +205,23 @@ Every choice maps to an established standard (dbt Labs structure guide, Twelve-F
 Once you've mastered the core concepts, you can move on to more advanced features:
 
 - **Macros & Jinja** — write reusable logic following modularity principles; write it once and call it anywhere in the project, instead of rewriting the same logic for every model
-- **Packages** — install ready-made libraries from `dbt Hub`, such as `dbt_utils` and `dbt_expectations`, to instantly add tests and helpers without writing data tests from scratch — **this project use these packages too !!!**
+- **Packages** — install ready-made libraries from **dbt Hub**, such as `dbt_utils` and `dbt_expectations`, to instantly add tests and helpers without writing data tests from scratch — **this project use these packages too !!!**
 - **Incremental Models** — build only new data instead of rebuilding the entire table, significantly reducing cost and runtime for projects with **continuously flowing data**
 - **Exposures** — declare which models feed into which dashboards or reports, to track downstream dependencies — so when making changes downstream, you won't accidentally disrupt other pipelines — **this project has this feature**
 - **Snapshots** — track how data changes over time (Slowly Changing Dimensions)
-- **Semantic Layer** — define metrics (e.g., revenue, churn rate) once in a single place instead of rewriting them repeatedly, then reuse them across any BI tool — **it unnecessary for such a small project like this project but once you scale out you’ll need it**
-- **dbt Cloud + CI/CD** — run dbt automatically on a schedule or via triggers, with Slim CI that only tests models that have changed — this project use `GitHub Action` to fill this role. It trigger by every `push` to GitHub
+- **Semantic Layer** — define metrics (e.g., revenue, churn rate) once in a single place instead of rewriting them repeatedly, then reuse them across any BI tool — **it unnecessary for such a small project like this but once you scale out you’ll need it**
+- **dbt Cloud + CI/CD** — run dbt automatically on a schedule or via triggers, with Slim CI that only tests models that have changed — **this project use `GitHub Actions` to fill this role. It trigger by every `push` to GitHub**
+- **etc.**
 
 ### **2. How is dbt used in real-world work?**
 
-In practice, `dbt` is industry gold standard, serves as the backbone of the data transformation layer ( E L " **T** ") within an organization's data stack — far more than just a tool for writing SQL to create tables — every thing about transformation done by dbt.
+In practice, `dbt` is **industry gold standard**, serves as **the backbone of the data transformation layer** ( E L " **T** ") within an organization's data stack — far more than just a tool for writing SQL to create tables — everything about transformation done by `dbt`.
 
-Data/Analytics Engineering and BI teams use dbt to manage complex pipelines with hundreds or even thousands of models, with everyone on the team working from the same codebase via `Git` — complete with version control, code review, and CI/CD, just like a software engineering team. This allows the pipeline to scale.
+**Data/Analytics Engineering and BI teams** use `dbt` to manage complex pipelines with hundreds or even thousands of models, with everyone on the team working from the same codebase via `Git` — complete with version control, code review, and CI/CD, just like a software engineering team. This allows the pipeline to scale.
 
 ### **Case Study**
 
-If you're interested, you can read case studies at [www.getdbt.com/case-studies](https://www.getdbt.com/case-studies). I highly recommend to reading them — see how powerful the tool really is. Companies using dbt include **McDonald's Nordics** and **Nasdaq** (the second-largest electronic stock exchange in the US).
+If you're interested, you can read case studies at [**`www.getdbt.com/case-studies`**](https://www.getdbt.com/case-studies) I highly recommend to reading them to see how powerful the tool is. Companies using dbt include **McDonald's Nordics** and **Nasdaq** (the second-largest electronic stock exchange in the US).
 
 ## **Additional Resources**
 

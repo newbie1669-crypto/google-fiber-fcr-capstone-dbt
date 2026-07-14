@@ -81,7 +81,7 @@ google-fiber-fcr-capstone/
 
 ---
 
-## 3. Design Decisions & Rationale
+## 3. Design Decisions in Repo
 
 Every choice maps to a published, reviewable standard.
 
@@ -89,43 +89,43 @@ Every choice maps to a published, reviewable standard.
 
 **Decision:** dbt project lives at `dbt/`, not at the repo root.
 
-**Reference:** [dbt Labs - How we structure our dbt projects](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview). dbt projects should live in a subfolder whenever the repo also contains non-dbt artifacts (dashboards, docs, scripts), so that each concern is independently navigable.
+**Reference:** [dbt Labs - How we structure our dbt projects](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview). dbt projects should live in a subfolder whenever the repo contains non-dbt artifacts (dashboards, docs).
 
-### 3.2 `staging` + `marts` only, no `intermediate`
+### 3.2 `staging` + `marts` only, no `intermediate` or `semantics layer`
 
 **Decision:** Two layers - `models/staging/` (views) and `models/marts/` (tables) - no intermediate layer.
 
 **Reference:** [dbt Labs - The marts layer](https://docs.getdbt.com/best-practices/how-we-structure/4-marts). Intermediate models exist to avoid duplication when multiple marts share complex logic. This pipeline has **one** mart - adding an intermediate layer would be premature abstraction.
 
-### 3.3 `profiles.yml` lives at `~/.dbt/`, not in the repo
+### 3.3 `profiles.yml` lives at `~/.dbt/` (in my computer), not in the repo
 
 **Decision:** Only `dbt/profiles.yml.example` is in version control. The real `profiles.yml` is at `~/.dbt/profiles.yml` (gitignored).
 
 **Reference:** [Twelve-Factor App III - Config](https://12factor.net/config) and [dbt Labs - About profiles](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml). Environment-specific config (credentials, project IDs, datasets) **must** be separated from code so the same code can run unchanged across dev, prod, and CI.
 
-### 3.4 `.github/workflows/` lives at the repo root
+### 3.4 `.github/workflows/` lives at repo root
 
 **Decision:** CI workflows live at `.github/workflows/dbt_ci.yml`, not at `dbt/.github/workflows/`.
 
-**Reference:** [GitHub Actions - About workflows](https://docs.github.com/en/actions/using-workflows/about-workflows). GitHub Actions discovers workflows **only** under the repo-root `.github/workflows/` directory. The previous location (inside `fiber_dbt/`) would have caused CI to silently never run - this was a real bug in the original layout.
+**Reference:** [GitHub Actions - About workflows](https://docs.github.com/en/actions/using-workflows/about-workflows). GitHub Actions discovers workflows **only** under the repo-root `.github/workflows/` directory.
 
-### 3.5 Engineering folder names (lower-case, no spaces)
+### 3.5 Engineering folder names (lower-case, no spaces) - `like_this`
 
-**Decision:** `docs/`, `sql/`, `dbt/`, `dashboards/` instead of `1 Capture/`, `2 Analyze/`, `3 Monitor/`.
+**Decision:** `docs/`, `sql/`, `dbt/`, `dashboards/` instead of `Something like this/`.
 
 **Reference:** [POSIX portable filename character set](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_278) plus [Cookiecutter Data Science conventions](https://drivendata.github.io/cookiecutter-data-science/). Spaces and capitalization in folder names create friction with the shell, with import paths, and with cross-platform tooling. Phase metadata is preserved in [`phase_mapping.md`](phase_mapping.md), not encoded in folder names.
 
 ### 3.6 `sql/` (legacy) kept alongside `dbt/` (production)
 
-**Decision:** Legacy raw SQL (pre-dbt) is preserved as reference, not deleted.
+**Decision:** Legacy raw SQL (pre-dbt and came from a classic project) is preserved as reference.
 
-**Reference:** [README-Driven Development - Tom Preston-Werner](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html). For a portfolio project, showing the progression "raw SQL → dbt project with tests" is a stronger signal than showing only the final state. The `sql/README.md` explains the relationship explicitly.
+**Reference:** [README-Driven Development - Tom Preston-Werner](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html). For a portfolio project, showing the progression "raw SQL → dbt project with tests" is a better than showing only the final state. See `sql/README.md` to explains the relationship.
 
 ### 3.7 `data/samples/` separate from `data/raw/`
 
 **Decision:** A small, sanitized sample lives in `data/samples/`; `data/raw/` is intentionally empty with a README pointing to BigQuery.
 
-**Reference:** [Cookiecutter Data Science - Data is immutable](https://drivendata.github.io/cookiecutter-data-science/#data-is-immutable). Raw data should never be committed; only a small representative sample, for local exploration or onboarding.
+**Reference:** [Cookiecutter Data Science - Data is immutable](https://drivendata.github.io/cookiecutter-data-science/#data-is-immutable). Raw data should never be committed; only a small representative sample, for exploration or onboarding.
 
 ### 3.8 `dashboards/` split by BI tool
 
@@ -135,7 +135,7 @@ Every choice maps to a published, reviewable standard.
 
 ### 3.9 `.gitignore` blocks secrets & build artifacts
 
-**Decision:** `.gitignore` actively blocks `profiles.yml`, `*.json` keys, `target/`, `dbt_packages/`, and OS noise.
+**Decision:** `.gitignore` actively blocks `*.json` keys, `target/`, `dbt_packages/`, and OS noise.
 
 **Reference:** [GitHub - gitignore best practices](https://github.com/github/gitignore) plus [OWASP - Secret Management](https://owasp.org/www-community/vulnerabilities/Use_of_hard-coded_password). Defense-in-depth - even if someone accidentally `git add`s a secret, `.gitignore` blocks it.
 

@@ -1,16 +1,16 @@
 # Data
 
-This folder holds reference data - **not the production source**. The real raw tables live in my BigQuery.
+This folder holds reference data - **not the production source** as production source came from BigQuery
 
 ```text
 data/
-├── raw/                # intentionally empty
-└── samples/            # small sanitized CSV for local previews
+├── raw/                
+└── samples/                # small CSV for local previews
 ```
 
 ## `raw/`
 
-**Empty by design.** Raw data lives in BigQuery (`gbi-test.fiber.market_{1,2,3}`) and should never be committed to the repo. This follows the *"data is immutable"* principle from Cookiecutter Data Science.
+**Empty by design.** Raw data lives in `BigQuery` and never be committed to the repo. This follows the ***"data is immutable"*** principle from `Cookiecutter Data Science`.
 
 ## `samples/`
 

@@ -6,10 +6,10 @@ Schema of all tables in the pipeline.
 
 ## Raw Source - `gbi-test.fiber.market_{1,2,3}`
 
-Three sibling tables, identical schema, one per market.
+Three tables, same schema, one per market.
 
-| Column         | Type   | Nullable | Description                                                              |
-|----------------|--------|----------|--------------------------------------------------------------------------|
+| Column | Type | Nullable | Description |
+| --- | --- | --- | --- |
 | `date_created` | DATE   | No       | First-contact date for the (type, market) bucket                         |
 | `contacts_n`   | INT64  | No       | First contacts on `date_created`                                         |
 | `contacts_n_1` | INT64  | No       | Repeat contacts 1 day after first contact                                |
@@ -31,8 +31,6 @@ Three sibling tables, identical schema, one per market.
 | `type_3` | Scheduling                    |
 | `type_4` | Construction                  |
 | `type_5` | Internet and WiFi             |
-
-> ⚠️ The dbt `accepted_values` test uses the **English labels** (e.g. `TECHNICIAN`, `INTERNET AND WIFI`). If the raw data uses codes (`type_1` …), update either the source or the test to keep them aligned. See `dbt/models/marts/_schema.yml`.
 
 ---
 
@@ -92,4 +90,4 @@ The grain of `mart_fiber_fcr` is **one row per `(date_created, new_type, new_mar
 
 - **`fcr_day1_rate`** - share of first contacts that did **not** trigger a call-back the next day. *Primary KPI* - higher is better.
 - **`fcr_7day_rate`** - share of first contacts with **zero repeats over 7 days**. *Secondary KPI* - stricter measure.
-- **`repeat_rate_day{N}`** - used to plot the **decay curve** of repeat calls over time. Useful for finding "lingering issue" patterns.
+- **`repeat_rate_day{N}`** - used to plot the **decay curve** of repeat calls over time. Useful for finding **" lingering issue "** patterns.

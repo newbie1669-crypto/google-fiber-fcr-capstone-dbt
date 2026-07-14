@@ -1,4 +1,4 @@
-# GBI Phase Folder Mapping
+# BI Phase Folder Mapping
 
 This project follows the **Capture -> Analyze -> Monitor** lifecycle taught in the Google Business Intelligence Certificate. The engineering layout uses standard data-engineering folder names, but every GBI phase is preserved and traceable.
 
@@ -6,9 +6,9 @@ This project follows the **Capture -> Analyze -> Monitor** lifecycle taught in t
 
 ## Side-by-side mapping
 
-| GBI Phase  | Engineering folder(s)                                | What lives there                                                                                          |
+| BI Phase  | Engineering folder(s)                                | What lives there                                                                                          |
 |------------|------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| **1. Capture** | `docs/`                                          | Stakeholder requirements, project requirements, ROCCC data assessment, data dictionary, architecture doc  |
+| **1. Capture** | `docs/`                                          | Stakeholder requirements, project requirements, ROCCC data assessment, data dictionary, architecture doc, few images  |
 | **2. Analyze** | `sql/` + `dbt/` + `data/samples/`                | Legacy exploratory SQL -> production dbt models (staging + marts) + 12 DQ tests + sample CSV               |
 | **3. Monitor** | `dashboards/`                                    | Three BI dashboards (Tableau, Power BI, Data Studio) + lo-fi mockups + GitHub Actions CI                |
 
@@ -44,7 +44,7 @@ Monitor is about putting the answers in front of stakeholders and keeping them f
 - **`dashboards/mockups/`** - lo-fi mockups from the design phase, kept for context
 - **`.github/workflows/`** - CI that re-runs `dbt run + dbt test` on every push, so dashboards never read stale or broken data
 
-## Why we didn't keep the original `1 Capture/` / `2 Analyze/` / `3 Monitor/` folder names
+## Why didn't keep the folder names like `1 Capture/` / `2 Analyze/` / `3 Monitor/` 
 
 Three reasons:
 
@@ -52,4 +52,4 @@ Three reasons:
 2. **Discoverability for reviewers** - data engineers and BI hiring managers expect names like `dbt/`, `dashboards/`, `docs/`; numbered phase names look unfamiliar.
 3. **Information goes in docs, not in path names** - phase information is metadata about *how* the work was done; the folder is *where the artifact lives*. Two different things.
 
-The GBI phase metadata is fully preserved in this document and in the root `README.md`.
+The BI phase metadata is fully preserved in this document and in the root `README.md`.
