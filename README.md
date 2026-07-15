@@ -101,7 +101,7 @@ This project uses the dataset from the Google Fiber capstone project, which reco
 
 ---
 
-## **Result and Recommendations**
+## **Results**
 
 - We have a data pipeline with the `lineage` shown below, connected from source data on Google BigQuery
 
@@ -109,7 +109,7 @@ This project uses the dataset from the Google Fiber capstone project, which reco
 
 - Data has been validated and quality-checked, ready for use
 - Deployed via `GitHub Actions` with a **status badge** confirming the pipeline runs successfully — proof that the code isn't broken and can be worked on collaboratively with others in the same codebase, not just run locally in my computer
-- Hosted `dbt docs site` where you can view model and pipeline descriptions
+- Hosted `dbt docs site` where you can view model and pipeline descriptions - [**`CHECKOUT THIS DOCS`**](https://newbie1669-crypto.github.io/google-fiber-fcr-capstone-dbt/#!/overview)
 - A dashboard connected to real data on the warehouse ( this repo **only Data Studio dashboard connects live to BigQuery** — other dashboard tools would require uploading files to the repo, forcing a switch to import mode with embedded data otherwise anyone wouldn't be able to view it )
 - **Summary deck** for stakeholders with  **recommentdations** and **valuation** — [`Coming soon`](docs/)
 
@@ -238,9 +238,11 @@ If you're interested, you can read case studies at [**`www.getdbt.com/case-studi
 
 | SOURCE | LINK |
 | --- | --- |
-| dbt Learn (free course) | [learn.getdbt.com](https://learn.getdbt.com/catalog) |
-| official dbt document | [docs.getdbt.com](https://docs.getdbt.com/docs/introduction) |
+| dbt Learn (completely free) | [learn.getdbt.com](https://learn.getdbt.com/catalog) |
+| Official dbt Document | [docs.getdbt.com](https://docs.getdbt.com/docs/introduction) |
 | Best Practices Guide | [docs.getdbt.com/guides/best-practices](https://docs.getdbt.com/guides/best-practices) |
+
+**Key words:** `Analytic engineers` `modern data stack`
 
 ---
 
